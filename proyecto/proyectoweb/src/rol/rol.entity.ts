@@ -20,10 +20,10 @@ export class RolEntity {
     )
     nombre:string
 
-   /* @OneToMany(type => UsuarioRolEntity,
-        usuarioRol=>usuarioRol.usuarios)
+    @OneToMany(type => UsuarioRolEntity,
+        usuarioRol=>usuarioRol.rol)
 
-    idRol:RolEntity*/
+    usuarios:UsuarioRolEntity[]
 
 
 

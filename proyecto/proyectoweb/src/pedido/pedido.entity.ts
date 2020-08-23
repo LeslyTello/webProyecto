@@ -1,5 +1,7 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {PagoEntity} from "../pago/pago.entity";
+import {UsuarioEntity} from "../usuario/usuario.entity";
+import {DetallePedidoEntity} from "../detalle-pedido/detalle-pedido.entity";
 
 @Entity('pedido')
 export class PedidoEntity{
@@ -56,6 +58,19 @@ export class PedidoEntity{
         pago=>pago.pedidos
     )
     pago:PagoEntity
+
+
+    @ManyToOne(
+        type => UsuarioEntity,
+        usuario=>usuario.pedidos
+    )
+    usuario:UsuarioEntity
+
+    @OneToMany(
+        type=>DetallePedidoEntity,
+        detalle=>detalle.pedido
+    )
+    detallesPedido:DetallePedidoEntity[]
 
 
 

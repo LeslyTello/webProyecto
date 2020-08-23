@@ -1,6 +1,7 @@
 import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ImagenProductoEntity} from "../imagen-producto/imagen-producto.entity";
 import {CategoryEntity} from "../categoria/category.entity";
+import {DetallePedidoEntity} from "../detalle-pedido/detalle-pedido.entity";
 
 @Entity('producto')
 export class ProductoEntity{
@@ -79,6 +80,13 @@ export class ProductoEntity{
         categoria=> categoria.productos
     )
     categoria:CategoryEntity
+
+
+    @OneToMany(
+        type => DetallePedidoEntity,
+        detalle=>detalle.producto
+    )
+    detallesProducto:DetallePedidoEntity[]
 
 
 }

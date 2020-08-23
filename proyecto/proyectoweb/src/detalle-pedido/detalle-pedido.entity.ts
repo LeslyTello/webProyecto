@@ -1,4 +1,6 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {PedidoEntity} from "../pedido/pedido.entity";
+import {ProductoEntity} from "../producto/producto.entity";
 
 @Entity('detalle_pedido')
 export class DetallePedidoEntity{
@@ -26,4 +28,19 @@ export class DetallePedidoEntity{
         type:'float'
     })
     valorTotal:number
+
+    @ManyToOne(
+        type => PedidoEntity,
+        pedido=>pedido.detallesPedido
+    )
+    pedido:PedidoEntity
+
+
+    @ManyToOne(
+        type=>ProductoEntity,
+        producto=>producto.detallesProducto
+    )
+    producto:ProductoEntity
+
+
 }

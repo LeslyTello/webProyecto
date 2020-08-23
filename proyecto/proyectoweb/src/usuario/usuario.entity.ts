@@ -1,6 +1,8 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {UsuarioRolEntity} from "../usuario-rol/usuario-rol.entity";
 import {type} from "os";
+import {DireccionEntity} from "../direccion/direccion.entity";
+import {PedidoEntity} from "../pedido/pedido.entity";
 
 @Entity('usuario')
 export class UsuarioEntity{
@@ -68,9 +70,21 @@ export class UsuarioEntity{
     })
     fechaNacimiento?:string
 
-   /* @OneToMany(type =>UsuarioRolEntity,
-        usuarioRol=> usuarioRol.roles)
-    idUsuario:UsuarioEntity*/
+   @OneToMany(type =>UsuarioRolEntity,
+        usuarioRol=> usuarioRol.rol)
+    roles:UsuarioRolEntity
+
+    @OneToMany(
+        type => DireccionEntity,
+        direccion=>direccion.usuario
+    )
+    direcciones:DireccionEntity[]
+
+    @OneToMany(
+        type =>PedidoEntity,
+        pedido=>pedido.usuario
+    )
+    pedidos:PedidoEntity[]
 
 
 

@@ -13,15 +13,18 @@ export class UsuarioRolEntity{
     } )
     id:number
 
-    /*@ManyToOne(
+    @ManyToOne(
         type => RolEntity,
-        rol=>rol.idRol
+        rol=>rol.usuarios
     )
-    usuarios:UsuarioRolEntity[]
+    rol: RolEntity
 
     @ManyToOne(
         type => UsuarioEntity,
-        usuario=>usuario.idUsuario
+        usuario=>usuario.roles
     )
-    roles:UsuarioRolEntity[]*/
+    usuario:UsuarioEntity
+
+
+
 }
