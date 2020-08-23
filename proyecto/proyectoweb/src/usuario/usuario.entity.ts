@@ -1,6 +1,5 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {UsuarioRolEntity} from "../usuario-rol/usuario-rol.entity";
-import {type} from "os";
 import {DireccionEntity} from "../direccion/direccion.entity";
 import {PedidoEntity} from "../pedido/pedido.entity";
 

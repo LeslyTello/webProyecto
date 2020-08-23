@@ -58,13 +58,13 @@ export class ProductoEntity{
         type:'datetime',
         name:'fecha_inicio'
     })
-    fechaInicio:String
+    fechaInicio:string
 
     @Column({
         type:'datetime',
         name:'fecha_fin'
     })
-    fechaFin:String
+    fechaFin:string
 
 
     @OneToMany(
