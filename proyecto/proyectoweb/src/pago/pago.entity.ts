@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {PedidoEntity} from "../pedido/pedido.entity";
 
 @Entity('pago')
 export class PagoEntity{
@@ -17,5 +18,11 @@ export class PagoEntity{
     })
     tipoPago:string
 
+
+    @OneToMany(
+        type => PedidoEntity,
+        pedido=>pedido.pago
+    )
+    pedidos:PedidoEntity[]
 
 }

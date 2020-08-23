@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {PagoEntity} from "../pago/pago.entity";
 
 @Entity('pedido')
 export class PedidoEntity{
@@ -49,5 +50,14 @@ export class PedidoEntity{
 
     })
     estado:string
+
+    @ManyToOne(
+        type=>PagoEntity,
+        pago=>pago.pedidos
+    )
+    pago:PagoEntity
+
+
+
 
 }

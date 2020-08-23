@@ -1,4 +1,6 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {ImagenProductoEntity} from "../imagen-producto/imagen-producto.entity";
+import {CategoryEntity} from "../categoria/category.entity";
 
 @Entity('producto')
 export class ProductoEntity{
@@ -62,6 +64,21 @@ export class ProductoEntity{
         name:'fecha_fin'
     })
     fechaFin:String
+
+
+    @OneToMany(
+        type => ImagenProductoEntity,
+        imagenProducto=>imagenProducto.producto
+    )
+    imagenes:ImagenProductoEntity[]
+
+
+
+    @ManyToOne(
+        type => CategoryEntity,
+        categoria=> categoria.productos
+    )
+    categoria:CategoryEntity
 
 
 }
