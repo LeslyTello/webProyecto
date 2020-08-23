@@ -1,5 +1,6 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {UsuarioRolEntity} from "../usuario-rol/usuario-rol.entity";
+import {type} from "os";
 
 @Entity('usuario')
 export class UsuarioEntity{
@@ -54,7 +55,7 @@ export class UsuarioEntity{
 
     @Column({
         name:'estado_usuario',
-        type: 'number',
+        type: 'int',
 
     })
     estado:number
@@ -66,6 +67,10 @@ export class UsuarioEntity{
 
     })
     fechaNacimiento?:string
+
+   /* @OneToMany(type =>UsuarioRolEntity,
+        usuarioRol=> usuarioRol.roles)
+    idUsuario:UsuarioEntity*/
 
 
 

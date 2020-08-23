@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {UsuarioRolEntity} from "../usuario-rol/usuario-rol.entity";
 
 @Entity('rol')
 export class RolEntity {
@@ -18,4 +19,12 @@ export class RolEntity {
 
     )
     nombre:string
+
+   /* @OneToMany(type => UsuarioRolEntity,
+        usuarioRol=>usuarioRol.usuarios)
+
+    idRol:RolEntity*/
+
+
+
 }

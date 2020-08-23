@@ -7,20 +7,26 @@ export class DireccionEntity {
     @PrimaryGeneratedColumn({
 
         comment:'Identificador de direccion cliente',
-        name:'id_direccion'}
+        name:'id_direccion',
+        type:"int"
+    }
 
     )
     id:number
 
     @Column({
-            name:'latitud'
+            name:'latitud',
+            type:'varchar',
+            length:'100'
         }
 
     )
     latitud:string
 
     @Column({
-            name:'longitud'
+        name:'longitud',
+        type:'varchar',
+        length:'100'
         }
 
     )
@@ -28,7 +34,9 @@ export class DireccionEntity {
 
 
     @Column({
-            name:'referencia',
+        name:'referencia',
+        type:'varchar',
+        length:'100'
         
         }
 
