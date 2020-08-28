@@ -65,6 +65,8 @@ export class UsuarioEntity{
     @Column({
         name:'fecha_nacimiento_usuario',
         type: 'date',
+        nullable:true
+
 
     })
     fechaNacimiento?:string

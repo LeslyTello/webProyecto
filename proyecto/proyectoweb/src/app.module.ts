@@ -12,9 +12,12 @@ import {PagoEntity} from "./pago/pago.entity";
 import {ProductoEntity} from "./producto/producto.entity";
 import {ImagenProductoEntity} from "./imagen-producto/imagen-producto.entity";
 import {CategoryEntity} from "./categoria/category.entity";
+import {UsuarioModule} from "./usuario/usuario.module";
 
 @Module({
-  imports: [ TypeOrmModule.forRoot({
+  imports: [
+      UsuarioModule,
+      TypeOrmModule.forRoot({
     name:'default',//nombre de conexion
     type: 'mysql',//mysql, postgres, etc
     host: 'localhost', //IP
