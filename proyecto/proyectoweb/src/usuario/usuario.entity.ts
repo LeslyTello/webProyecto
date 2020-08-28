@@ -69,7 +69,7 @@ export class UsuarioEntity{
     })
     fechaNacimiento?:string
 
-   @OneToMany(type =>UsuarioRolEntity,
+   @OneToMany(type => UsuarioRolEntity,
         usuarioRol=> usuarioRol.rol)
     roles:UsuarioRolEntity
 
