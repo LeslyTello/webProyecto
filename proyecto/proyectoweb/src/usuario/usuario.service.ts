@@ -1,7 +1,7 @@
 import {InjectRepository} from "@nestjs/typeorm";
 import {UsuarioEntity} from "./usuario.entity";
 import {Repository} from "typeorm";
-import {UsuarioCreateDto} from "./dto/usuario.create.dto";
+
 
 export class UsuarioService{
     constructor(

@@ -11,12 +11,18 @@ import {DetallePedidoEntity} from "./detalle-pedido/detalle-pedido.entity";
 import {PagoEntity} from "./pago/pago.entity";
 import {ProductoEntity} from "./producto/producto.entity";
 import {ImagenProductoEntity} from "./imagen-producto/imagen-producto.entity";
-import {CategoryEntity} from "./categoria/category.entity";
 import {UsuarioModule} from "./usuario/usuario.module";
+import {CategoriaModule} from "./categoria/categoria.module";
+import {CategoriaEntity} from "./categoria/category.entity";
+import {ProductoModule} from "./producto/producto.module";
+import {PagoModule} from "./pago/pago.module";
 
 @Module({
   imports: [
       UsuarioModule,
+      CategoriaModule,
+      ProductoModule,
+      PagoModule,
       TypeOrmModule.forRoot({
     name:'default',//nombre de conexion
     type: 'mysql',//mysql, postgres, etc
@@ -35,7 +41,7 @@ import {UsuarioModule} from "./usuario/usuario.module";
         PagoEntity,
         ProductoEntity,
         ImagenProductoEntity,
-        CategoryEntity
+        CategoriaEntity
 
     ],
     synchronize: true,// Actualiza el estado de la base de datos

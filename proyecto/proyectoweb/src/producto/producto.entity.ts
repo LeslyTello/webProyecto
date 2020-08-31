@@ -1,6 +1,6 @@
 import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ImagenProductoEntity} from "../imagen-producto/imagen-producto.entity";
-import {CategoryEntity} from "../categoria/category.entity";
+import {CategoriaEntity} from "../categoria/category.entity";
 import {DetallePedidoEntity} from "../detalle-pedido/detalle-pedido.entity";
 
 @Entity('producto')
@@ -17,7 +17,8 @@ export class ProductoEntity{
     @Column({
         name:'codigo_producto',
         type:'varchar',
-        length:20
+        length:20,
+        nullable:true
         }
 
     )
@@ -27,7 +28,8 @@ export class ProductoEntity{
     @Column({
         name:'nombre_producto',
         type:'varchar',
-        length:20
+        length:50,
+        nullable:false
     })
 
     nombre:string
@@ -36,7 +38,8 @@ export class ProductoEntity{
     @Column({
         name:'descripcion_producto',
         type:'varchar',
-        length:20
+        length:100,
+        nullable:true
         }
 
     )
@@ -44,25 +47,29 @@ export class ProductoEntity{
 
     @Column({
         type:'float',
-        name:'precio_producto'
+        name:'precio_producto',
+        nullable:false
     })
     precio:number
 
     @Column({
         type:'int',
-        name:'cantidad_producto'
+        name:'cantidad_producto',
+        nullable:true
     })
     cantidad:number
 
     @Column({
         type:'datetime',
-        name:'fecha_inicio'
+        name:'fecha_inicio',
+        nullable:true
     })
     fechaInicio:string
 
     @Column({
         type:'datetime',
-        name:'fecha_fin'
+        name:'fecha_fin',
+        nullable:true
     })
     fechaFin:string
 
@@ -76,10 +83,10 @@ export class ProductoEntity{
 
 
     @ManyToOne(
-        type => CategoryEntity,
+        type => CategoriaEntity,
         categoria=> categoria.productos
     )
-    categoria:CategoryEntity
+    categoria:CategoriaEntity
 
 
     @OneToMany(

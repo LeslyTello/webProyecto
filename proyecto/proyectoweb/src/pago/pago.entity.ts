@@ -14,9 +14,10 @@ export class PagoEntity{
     @Column({
         type:'varchar',
         length:'50',
-        name:'tipo_pago'
+        name:'tipo_pago',
+        nullable:false
     })
-    tipoPago:string
+    nombrePago:string
 
 
     @OneToMany(
