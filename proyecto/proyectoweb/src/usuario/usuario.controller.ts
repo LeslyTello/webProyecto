@@ -1,4 +1,13 @@
-import {BadRequestException, Body, Controller, Get, HttpCode, InternalServerErrorException, Post} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    HttpCode,
+    InternalServerErrorException,
+    Post,
+    Res
+} from "@nestjs/common";
 import {UsuarioService} from "./usuario.service";
 import {UsuarioCreateDto} from "./dto/usuario.create.dto";
 import {validate} from "class-validator";
@@ -59,5 +68,12 @@ export class UsuarioController{
         }else{
             throw new BadRequestException('Error en los datos ingresados ')
         }
+     }
+
+
+     @Get('vista/inicio')
+    inicio(@Res() res){
+         res.render(
+             'compartido/pie');
      }
 }
