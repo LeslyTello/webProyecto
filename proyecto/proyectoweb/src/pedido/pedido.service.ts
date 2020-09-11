@@ -1,10 +1,25 @@
 import {InjectRepository} from "@nestjs/typeorm";
-import {PagoEntity} from "../pago/pago.entity";
 import {Repository} from "typeorm";
 import {PedidoEntity} from "./pedido.entity";
 
 export class PedidoService{
     constructor(@InjectRepository(PedidoEntity)
                 private repositorioPedido: Repository<PedidoEntity>) {
+    }
+
+    crearUnPedido(pedido:PedidoEntity){
+        return this.repositorioPedido.save(pedido)
+    }
+
+    mostrarTodosPedido(){
+        return this.repositorioPedido.find()
+    }
+
+    eliminarUnPedido(id:number){
+        return this.repositorioPedido.delete(id)
+    }
+
+    modificarPedido(pedidoModificado:PedidoEntity){
+        return this.repositorioPedido.save(pedidoModificado)
     }
 }

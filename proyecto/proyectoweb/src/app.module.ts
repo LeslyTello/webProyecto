@@ -20,6 +20,8 @@ import {ImagenProductoModule} from "./imagen-producto/imagen-producto.module";
 import {DireccionModule} from "./direccion/direccion.module";
 import {RolModule} from "./rol/rol.module";
 import {UsuarioRolModule} from "./usuario-rol/usuario-rol.module";
+import {PedidoModule} from "./pedido/pedido.module";
+import {DetallePedidoModule} from "./detalle-pedido/detalle-pedido.module";
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import {UsuarioRolModule} from "./usuario-rol/usuario-rol.module";
       DireccionModule,
       RolModule,
       UsuarioRolModule,
+      PedidoModule,
+      DetallePedidoModule,
       PagoModule,
       TypeOrmModule.forRoot({
     name:'default',//nombre de conexion

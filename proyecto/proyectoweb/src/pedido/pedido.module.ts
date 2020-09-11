@@ -1,8 +1,8 @@
 import {Module} from "@nestjs/common";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {PedidoEntity} from "./pedido.entity";
-import {DetallePedidoService} from "../detalle-pedido/detalle-pedido.service";
 import {PedidoController} from "./pedido.controller";
+import {PedidoService} from "./pedido.service";
 
 @Module({
     imports:[
@@ -10,7 +10,7 @@ import {PedidoController} from "./pedido.controller";
         [PedidoEntity],
         'default' //nombre de la cadena de conexion
     )],
-    providers:[DetallePedidoService],
+    providers:[PedidoService],
     controllers:[PedidoController]}
 )
 export class PedidoModule{
