@@ -39,6 +39,7 @@ export class ProductoController{
             productoValidar.cantidad=parametros.cantidad
             productoValidar.fechaInicio=parametros.fechaInicio
             productoValidar.fechaFin=parametros.fechaFin
+            productoValidar.categoria=parametros.categoria
 
             const errores=await validate(productoValidar)
             if(errores.length>0){

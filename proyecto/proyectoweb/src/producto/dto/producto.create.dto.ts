@@ -34,5 +34,11 @@ export class ProductoCreateDto{
 
 
 
+    @IsOptional()
+    @IsInt()
+    categoria?:number
+
+
+
 
 }

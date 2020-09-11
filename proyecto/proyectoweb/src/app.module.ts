@@ -16,12 +16,20 @@ import {CategoriaModule} from "./categoria/categoria.module";
 import {CategoriaEntity} from "./categoria/category.entity";
 import {ProductoModule} from "./producto/producto.module";
 import {PagoModule} from "./pago/pago.module";
+import {ImagenProductoModule} from "./imagen-producto/imagen-producto.module";
+import {DireccionModule} from "./direccion/direccion.module";
+import {RolModule} from "./rol/rol.module";
+import {UsuarioRolModule} from "./usuario-rol/usuario-rol.module";
 
 @Module({
   imports: [
       UsuarioModule,
       CategoriaModule,
+      ImagenProductoModule,
       ProductoModule,
+      DireccionModule,
+      RolModule,
+      UsuarioRolModule,
       PagoModule,
       TypeOrmModule.forRoot({
     name:'default',//nombre de conexion

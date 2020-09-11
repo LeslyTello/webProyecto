@@ -4,7 +4,7 @@ import {ImagenProductoEntity} from "./imagen-producto.entity";
 import {ImagenProductoService} from "./imagen-producto.service";
 import {ImagenProductoController} from "./imagen-producto.controller";
 
-Module({
+@Module({
     imports:[
         TypeOrmModule.forFeature(
             [ImagenProductoEntity],

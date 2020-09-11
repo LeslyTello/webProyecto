@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ProductoEntity} from "../producto/producto.entity";
 
 @Entity('categoria')
@@ -17,7 +17,7 @@ export class CategoriaEntity{
     })
     nombre:string
 
-    @ManyToOne(
+    @OneToMany(
         type => ProductoEntity,
         producto=>producto.categoria
     )
