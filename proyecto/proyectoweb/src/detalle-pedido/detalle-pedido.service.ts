@@ -15,4 +15,14 @@ export class DetallePedidoService {
     mostrarTodos(){
         return this.repositorioDetallePedido.find()
     }
+
+    buscarTodaRelacion(){
+        let peticion
+
+        peticion={
+            relations:['producto']
+        }
+
+        return this.repositorioDetallePedido.find(peticion)
+    }
 }

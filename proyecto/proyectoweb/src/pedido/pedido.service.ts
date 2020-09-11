@@ -22,4 +22,14 @@ export class PedidoService{
     modificarPedido(pedidoModificado:PedidoEntity){
         return this.repositorioPedido.save(pedidoModificado)
     }
+
+    buscarTodaRelacion(){
+        let peticion
+
+        peticion={
+                relations:['detallesPedido']
+        }
+
+        return this.repositorioPedido.find(peticion)
+    }
 }

@@ -27,4 +27,9 @@ export class PedidoController{
         return this._pedidoService.mostrarTodosPedido()
     }
 
+    @Get('relacion')
+    async mostrarRelacion(){
+        return this._pedidoService.buscarTodaRelacion()
+    }
+
 }

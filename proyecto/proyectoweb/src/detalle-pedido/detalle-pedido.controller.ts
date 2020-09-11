@@ -28,4 +28,10 @@ constructor(
     }
 
 
+    @Get('relacion')
+    async mostrarRelacion(){
+        return this._detallePedidoService.buscarTodaRelacion()
+    }
+
+
 }
