@@ -1,26 +1,30 @@
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength} from "class-validator";
+import {IsAlpha, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, MaxLength} from "class-validator";
 
 export class ProductoCreateDto{
-
     @MaxLength(20)
-   codigo?:string
+    @IsString()
+    codigo?:string
 
 
     @MaxLength(50)
     @IsNotEmpty()
+    @IsAlpha()
     nombre:string
 
 
     @MaxLength(100)
     @IsOptional()
+    @IsString()
     descripcion?:string
 
 
     @IsNumber()
     @IsNotEmpty()
+    @IsPositive()
     precio:number
 
     @IsInt()
+    @IsPositive()
     cantidad?:number
 
     @IsString()

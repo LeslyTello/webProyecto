@@ -6,12 +6,11 @@ import {UsuarioEntity} from "../usuario/usuario.entity";
 export class UsuarioRolEntity{
 
     @PrimaryGeneratedColumn({
-
         comment:'Identificador rol-usuario',
         name:'id_usuario_rol',
         type:'int'
     } )
-    id:number
+    id?:number
 
     @ManyToOne(
         type => RolEntity,

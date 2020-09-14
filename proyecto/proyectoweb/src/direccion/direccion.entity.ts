@@ -37,12 +37,13 @@ export class DireccionEntity {
     @Column({
         name:'referencia',
         type:'varchar',
-        length:'100'
+        length:'100',
+        nullable:true
         
         }
 
     )
-    referencia:string
+    referencia?:string
 
     @ManyToOne(
         type=> UsuarioEntity,
