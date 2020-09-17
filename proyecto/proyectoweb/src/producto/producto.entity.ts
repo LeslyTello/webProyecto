@@ -9,7 +9,7 @@ export class ProductoEntity{
     @PrimaryGeneratedColumn({
 
         comment:'Identificador del rol',
-        name:'id_rol'}
+        name:'id_producto'}
 
     )
     id:number
@@ -76,7 +76,8 @@ export class ProductoEntity{
 
     @OneToMany(
         type => ImagenProductoEntity,
-        imagenProducto=>imagenProducto.producto
+        imagenProducto=>imagenProducto.producto,
+
     )
     imagenes:ImagenProductoEntity[]
 

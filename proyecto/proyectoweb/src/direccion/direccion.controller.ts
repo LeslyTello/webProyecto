@@ -1,5 +1,7 @@
-import {Body, Controller, Get, Post} from "@nestjs/common";
+import {BadRequestException, Body, Controller, Get, InternalServerErrorException, Post} from "@nestjs/common";
 import {DireccionService} from "./direccion.service";
+import {DireccionCreateDto} from "./dto/direccion.create.dto";
+import {validate} from "class-validator";
 
 @Controller('direccion')
 
@@ -15,12 +17,34 @@ export class DireccionController{
     async crearUno(
         @Body() parametros
     ){
+        let nuevaDireccion
       try{
-          const respuesta=await this._direccionService.crearUnaDireccion(parametros)
-          return respuesta
+            const direccion=new DireccionCreateDto()
+          direccion.latitud=parametros.latitud
+          direccion.longitud=parametros.longitud
+          direccion.referencia=parametros.referencia
+          const errores= await validate(direccion)
+          if(errores.length>0){
+              console.log(errores)
+              throw new BadRequestException('Error en los datos')
+          }else{
+              nuevaDireccion=direccion
+          }
+
       }catch (e) {
           console.log(e)
+          throw new BadRequestException('Error en los datos')
       }
+      if(nuevaDireccion){
+          try{
+              const respuesta=await this._direccionService.crearUnaDireccion(nuevaDireccion)
+              return respuesta
+          }catch (e) {
+              console.log(e)
+              throw new InternalServerErrorException('Error en el servidor')
+          }
+      }
+
     }
 
     @Get()

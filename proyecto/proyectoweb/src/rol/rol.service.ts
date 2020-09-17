@@ -7,4 +7,28 @@ export class RolService{
                  private repositorioRol:Repository<RolEntity>
     ) {
     }
+
+    buscarTodos(){
+        return this.repositorioRol.find()
+    }
+
+    buscarNombre(){
+        let peticion
+        peticion={
+            select:["nombre"]
+        }
+        return this.repositorioRol.find(peticion)
+    }
+
+    buscarIdPorNombre(nombre:string){
+        let peticion
+        peticion={
+            where:{
+                nombre:nombre
+            },
+            select:["id"]
+
+        }
+        return this.repositorioRol.find(peticion)
+    }
 }

@@ -16,4 +16,6 @@ export class UsuarioRolService{
     mostrarTodos(){
         return this.repositorioUsuarioRol.find()
     }
+
+
 }

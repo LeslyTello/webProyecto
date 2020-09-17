@@ -32,7 +32,7 @@ export class UsuarioCreateDto{
     telefono?:string
 
     @IsNumberString()
-    @IsNotEmpty()
+    @IsOptional()
     estado:string
 
     @IsNotEmpty()

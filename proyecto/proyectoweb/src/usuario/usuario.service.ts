@@ -32,4 +32,6 @@ export class UsuarioService{
         return this.repositorioUsuario.delete(id)
     }
 
+
+
 }

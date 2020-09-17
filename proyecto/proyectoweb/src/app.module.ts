@@ -23,6 +23,7 @@ import {UsuarioRolModule} from "./usuario-rol/usuario-rol.module";
 import {PedidoModule} from "./pedido/pedido.module";
 import {DetallePedidoModule} from "./detalle-pedido/detalle-pedido.module";
 
+//Contrase;a Lesly> adminWEB98
 @Module({
   imports: [
       UsuarioModule,
@@ -41,7 +42,7 @@ import {DetallePedidoModule} from "./detalle-pedido/detalle-pedido.module";
     host: 'localhost', //IP
     port: 3306, //puerto
     username: 'root', //usuario
-    password: 'root', //password
+    password: 'adminWEB98', //password
     database: 'web', //base de datos
     entities: [ //TODAS LAS ENTIDADES
         UsuarioEntity,

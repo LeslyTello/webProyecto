@@ -57,6 +57,7 @@ export class UsuarioEntity{
     @Column({
         name:'estado_usuario',
         type: 'int',
+        default:1
 
     })
     estado:number

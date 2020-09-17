@@ -1,9 +1,14 @@
-import {IsNotEmpty, IsString, MaxLength} from "class-validator";
+import {IsInt, IsNotEmpty, IsString, MaxLength} from "class-validator";
 
 
 export class ImagenProductoCreateDto {
     @IsString()
-    @MaxLength(50)
+    @MaxLength(200)
     @IsNotEmpty()
     url:string
+
+
+    @IsNotEmpty()
+    @IsInt()
+    producto:string
 }

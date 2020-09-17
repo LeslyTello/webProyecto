@@ -30,4 +30,26 @@ export class CategoriaService{
         return this.repositorioCategoria.find()
     }
 
+
+    buscarNombreCategoria(){
+        let peticion
+        peticion={
+            select:["nombre"]
+        }
+
+        return this.repositorioCategoria.find(peticion)
+    }
+
+    buscarIdPorNombre(nombre:string){
+        let peticion
+        peticion={
+            where:{
+                nombre:nombre
+            },
+            select:["id"]
+
+        }
+        return this.repositorioCategoria.find(peticion)
+    }
+
 }

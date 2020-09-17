@@ -36,6 +36,8 @@ export class UsuarioController{
 
      @Post()
     async crearUsuario(@Body() parametrosUsuario){
+
+        //Crea a un nuevo usuario por defecto el estado es 1.
         let usuarioNuevo
         try{
             const usuarioDto= new UsuarioCreateDto()
@@ -52,7 +54,7 @@ export class UsuarioController{
                 console.error('Errores', errores)
                 throw new BadRequestException('Errores encontrados')
             }else{
-                usuarioNuevo=parametrosUsuario
+                usuarioNuevo=usuarioDto
             }
 
         }catch (e) {
