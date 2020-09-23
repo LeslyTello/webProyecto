@@ -78,4 +78,17 @@ export class UsuarioController{
          res.render(
              'compartido/pie');
      }
+
+    @Get('vista/usuario')
+    vistaUsuario(
+        @Res() res
+    ){
+        const nombreControlador = 'Nicolas';
+        res.render(
+            'shop', //nombre de la vista (archivo)
+            {   //parametros de la vista
+                nombre: nombreControlador,
+            }
+        )
+    }
 }
