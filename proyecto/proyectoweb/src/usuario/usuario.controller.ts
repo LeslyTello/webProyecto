@@ -76,7 +76,7 @@ export class UsuarioController{
      @Get('vista/inicio')
     inicio(@Res() res){
          res.render(
-             'compartido/pie');
+             'index');
      }
 
     @Get('vista/usuario')
@@ -91,4 +91,6 @@ export class UsuarioController{
             }
         )
     }
+
+
 }

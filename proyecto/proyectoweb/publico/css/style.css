@@ -101,7 +101,7 @@ ul {
 	z-index: 99;
 }
 h1 a.navbar-brand {
-font-size:32px; 
+font-size:22px;
 color: #fff !important; 
 text-transform:capitalize; 
 font-weight: 400;
@@ -215,7 +215,7 @@ h5#exampleModalLabel{
 }
 /*--//model--*/
 /*-- banner --*/ 
-.one-img{  background: url(../images/b1.jpg)no-repeat center;}
+.one-img{  background: url(../images/download.jpg)no-repeat center;}
 .two-img{  background: url(../images/b2.jpg)no-repeat center;}
 .three-img{  background: url(../images/b3.jpg)no-repeat center;} 
 .slider-img{  background-size: cover;
