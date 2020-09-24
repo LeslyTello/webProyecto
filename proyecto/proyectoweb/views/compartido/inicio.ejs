@@ -2,37 +2,79 @@
 <head>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <!-- font-awesome icons -->
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- //font-awesome icons -->
+    <!-- For Clients slider -->
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="all" />
+    <!--flexs slider-->
+
+    <!--Shoping cart-->
+    <link rel="stylesheet" href="/css/shop.css" type="text/css" />
+    <!--//Shoping cart-->
+    <!--stylesheets-->
+    <link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 
 </head>
-<header id="home">
-    <div class="container">
-        <div class="menu">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-times"></i>
+<div class="header-bar">
+
+    <div class="container-fluid">
+
+
+        <!--Cabecera principal-->
+        <div class="hedder-up row">
+            <!-- -->
+            <div class="col-lg-3 col-md-3 logo-head justify-content-center">
+                <h1><a class="navbar-brand" href="index.ejs">Bolivar, colores y sabores</a></h1>
+            </div>
+
+            <div class="col-lg-4 col-md-3 right-side-cart">
+                <div class="cart-icons">
+                    <ul >
+
+                        <li>
+                            <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
+                        </li>
+                        <li class="toyscart toyscart2 cart cart box_1">
+                            <form action="#" method="post" class="last">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="display" value="1">
+                                <button class="top_toys_cart" type="submit" name="submit" value="">
+                                    <span class="fas fa-cart-arrow-down"></span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <nav class="d-flex align-items-center justify-content-center">
-            <a href="index.html">
-                <img class="img-fluid" src="https://i.pinimg.com/originals/6c/85/f5/6c85f5b2d39a5be5d4a624ff17be70d9.jpg">
-            </a>
-            <ul class="nav-list text-center p-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#home">Home</a>
+
+        <!--FIN Cabecera principal-->
+
+        <!--Inicio de navbar de contenido-->
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav ">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.ejs">Quiénes somos <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
+                    <a href="about.ejs" class="nav-link">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="service.ejs" class="nav-link">Contáctenos </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#menu">Menu</a>
-                </li>
+
             </ul>
-        </nav>
-        <div class="w-100  px-2">
-            <h1>Welcome</h1>
-            <p>Los mejroes postres para ti</p>
-            <a href="#">Explore</a>
-            <a href="#">Find a estore</a>
         </div>
-    </div>
-</header>
+    </nav>
+</div>
 </html>
