@@ -76,7 +76,7 @@ export class UsuarioController{
      @Get('vista/inicio')
     inicio(@Res() res){
          res.render(
-             'single');
+             'product');
      }
 
     @Get('vista/usuario')

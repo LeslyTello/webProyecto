@@ -1,0 +1,151 @@
+<!--A Design by W3layouts
+   Author: W3layout
+   Author URL: http://w3layouts.com
+   License: Creative Commons Attribution 3.0 Unported
+   License URL: http://creativecommons.org/licenses/by/3.0/
+   -->
+<!DOCTYPE html>
+<html lang="zxx">
+   <head>
+      <title>Toys Shop an Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+      <!--meta tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+
+      <script>
+         $( document ).ready(function() {
+            $('#fecha').datepicker();
+         });
+      </script>
+      <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+         
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+      </script>
+      <!--//meta tags ends here-->
+      <!--booststrap-->
+      <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+      <!--//booststrap end-->
+      <!-- font-awesome icons -->
+      <link href="/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+      <!-- //font-awesome icons -->
+      <!--Shoping cart-->
+      <link rel="stylesheet" href="/css/shop.css" type="text/css" />
+      <!--//Shoping cart-->
+      <!--stylesheets-->
+      <link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+      <!--//stylesheets-->
+      <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
+      <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+   </head>
+   <body>
+     <%-include('compartido/inicio')%>
+     <div class="inner_page-banner one-img">
+     </div>
+     <!--//banner -->
+     <!-- short -->
+     <div class="using-border py-3">
+        <div class="inner_breadcrumb  ml-4">
+           <ul class="short_ls">
+              <li>
+                 <a href="index.ejs">Cuenta</a>
+                 <span>/ /</span>
+              </li>
+              <li>Cambiar contraseña</li>
+           </ul>
+        </div>
+     </div>
+     <section class="service py-lg-4 py-md-3 py-sm-3 py-3">
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+           <div class="col-sm-12">
+
+              <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3"> <span class="far fa-user "></span>Mi Cuenta </h3>
+           </div>
+
+
+
+           <div class="row text-center">
+              <div class="col-sm-2">
+              </div>
+              <div class="col-lg-8">
+                 <form>
+                    <div class="form-group row">
+                       <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                       <div class="col-sm-10">
+                          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                       </div>
+                    </div>
+                    <div class="form-group row">
+                       <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
+                       </div>
+                    </div>
+
+                    <div class="form-group row">
+                       <label for="inputApellido" class="col-sm-2 col-form-label">Apellido</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+                       </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                       <label for="inputFechaNacimiento" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                       <div class="col-sm-10">
+
+                          <input type="password" class="form-control" id="inputFechaNacimiento" placeholder="Fecha de nacimiento">
+                       </div>
+                    </div>
+
+                    <div class="form-group row">
+                       <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
+                       <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono">
+                       </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                       <div class="col-sm-12">
+                          <button type="submit" class="btn btn-primary">Actualizar mis datos</button>
+                       </div>
+                    </div>
+
+
+                    <br><br>
+                    <div class="form-group row">
+
+                       <div class="col-sm-6">
+                          <div class="form-check">
+                             <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox">Eliminar mi cuenta
+                             </label>
+                          </div>
+                       </div>
+                       <div class="col-sm-4">
+                          <button class="submit btn-danger">
+                             Eliminar Cuenta
+                          </button></div>
+                    </div>
+                 </form>
+
+              </div>
+           </div>
+        </div>
+
+     </section>
+
+
+     <%-include('compartido/pie')%>
+   </body>
+</html>
