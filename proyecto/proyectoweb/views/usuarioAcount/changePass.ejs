@@ -1,0 +1,46 @@
+<!--Cambiar pass-->
+
+<form action="/usuario/guardar" autocomplete="off" method="post" class="f_account tpz_form_input" id="changePassword">
+    <div class="col_r s8of12 modPass">
+        <h2>Cambiar Contraseña</h2>
+        <div class="mod_collapsable_forms">
+            <fieldset>
+                <!--Nueva Contraseña-->
+                <div class="inline_field">
+                    <label for="user_new_password"><strong>Nueva Contraseña</strong></label>
+                    <span class="custom_input_medium">
+                        <input autocomplete="off" data-val="true" data-val-length="Su contraseña debe contener entre 4 y 15 caracteres" data-val-length-max="15" data-val-length-min="4" id="user_new_password" name="NewPassword" onkeydown=" if (event.which == 13) { event.preventDefault(); }" type="password" value="">
+                        <input class="input_toggle-mask" type="checkbox">
+                    </span>
+                    <span class="field-validation-valid" data-valmsg-for="NewPassword" data-valmsg-replace="true"></span>
+                </div>
+                <!--Confirmar contraseña-->
+                <div class="inline_field toRight">
+                    <label for="user_confirm_password"><strong>Confirmar contraseña</strong></label>
+                    <span class="custom_input_medium">
+                        <input data-val="true" data-val-equalto="La contraseña y su confirmación deben ser iguales" data-val-equalto-other="*.NewPassword" id="user_confirm_password" name="ConfirmNewPassword" onkeydown=" if (event.which == 13) { event.preventDefault(); }" type="password" value="">
+                        <input class="input_toggle-mask" type="checkbox">
+                    </span>
+                    <span class="field-validation-valid" data-valmsg-for="ConfirmNewPassword" data-valmsg-replace="true"></span>
+                </div>
+
+            </fieldset>
+
+            <div class="actions_submit">
+                <button type="submit" id="btnChangePassword" class="btn_submit button"><span>Guardar cambios en Mi Cuenta</span></button>
+            </div>
+            <input id="user_name" data-val="true" data-val-length="Su nombre no puede tener más de 30 caracteres" data-val-length-max="30" name="Name" type="hidden" value="">
+            <input id="user_phone_1" data-val="true" data-val-customerphone="El teléfono debe contener únicamente dígitos" data-val-required="Es necesario introducir un número de teléfono" name="FirstPhone" type="hidden" value="0985564134">
+            <input id="user_secondname" data-val="true" data-val-length="Sus apellidos no pueden tener más de 40 caracteres" data-val-length-max="40" name="SurName" type="hidden" value="">
+            <input id="user_borndate" name="BirthDate" type="hidden" value="">
+            <span class="checkbox safari safari537 not_msie"><input class="default_check" data-val="true" data-val-required="The IsEmployee field is required." id="employee" name="IsEmployee" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"></span><input name="IsEmployee" type="hidden" value="false">
+            <input id="user_employee_nif" data-val="true" data-val-length="Su DNI no puede tener más de 12 caracteres" data-val-length-max="12" name="NIF" type="hidden" value="">
+            <input data-val="true" data-val-digits="Su tarjeta no puede tener más de 12 digitos" data-val-length="Su tarjeta no puede tener más de 12 digitos" data-val-length-max="12" id="user_employee_card" name="CorporateCard" type="hidden" value="">
+            <span class="checkbox safari safari537 not_msie"><input class="default_check" data-val="true" data-val-required="The AcceptCheck4 field is required." id="AcceptCheck4" name="AcceptCheck4" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"></span><input name="AcceptCheck4" type="hidden" value="false">
+            <input checked="checked" data-val="true" data-val-mustbetrue="Debe aceptar el aviso legal y las condiciones de uso antes de continuar" data-val-required="The AcceptConditions field is required." id="checkLegal" name="AcceptConditions" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"><input name="AcceptConditions" type="hidden" value="false">
+            <input checked="checked" data-val="true" data-val-required="The AcceptSMS field is required." id="lbAcceptSMS" name="AcceptSMS" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"><input name="AcceptSMS" type="hidden" value="false">
+            <input checked="checked" data-val="true" data-val-required="The AcceptEmails field is required." id="lbAcceptEmails" name="AcceptEmails" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"><input name="AcceptEmails" type="hidden" value="false">
+            <input type="hidden" id="passConfirm" name="passConfirm">
+        </div>
+    </div>
+</form>

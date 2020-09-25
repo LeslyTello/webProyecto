@@ -43,9 +43,12 @@
       <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
    </head>
    <body>
-   <%- include('../compartido/inicio')%>
       <!-- //banner -->
-
+      <%if(!usuario){%>
+         <%- include('compartido/inicio.ejs')%>
+      <%} else {%>
+         <%- include('compartido/inicioUser.ejs')%>
+      <%}%>
 
       <!--//Customers Review -->
       <!-- Ultimos productos -->

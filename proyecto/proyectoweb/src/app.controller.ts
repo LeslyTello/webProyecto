@@ -16,10 +16,7 @@ export class AppController {
       @Session() session,
   ){
     res.render(
-        'product',
-        {
-          usuario: session
-        }
+        'index', {usuario:session.usuario}
     );
   }
 }

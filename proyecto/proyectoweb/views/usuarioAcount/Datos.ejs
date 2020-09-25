@@ -1,0 +1,80 @@
+<form action="/usuario/guardar" autocomplete="off" method="post" class="f_account tpz_form_input" id="saveUserData">
+    <div class="col_r s8of12 modDatos active">
+        <h1>Mis datos</h1>
+
+        <fieldset>
+            <legend class="accessible">Mis datos</legend>
+            <!--Email-->
+            <div class="inline_field to100">
+                <label><strong>Email</strong></label>
+                <span class="custom_input_unstyled">inchiglemanicolax@gmail.com</span>
+            </div>
+
+            <div class="inline_field toVacio"></div>
+
+            <!--Nombre-->
+            <div class="inline_field">
+                <label for="user_name"><strong>Nombre</strong></label>
+                <span class="custom_input_large">
+                    <input id="user_name" data-val="true" data-val-length="Su nombre no puede tener más de 30 caracteres" data-val-length-max="30" name="Name" onkeydown=" if (event.which == 13) { event.preventDefault(); }" title="Tu nombre" type="text" value="">
+                </span>
+                <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+            <!--Apellidos-->
+            <div class="inline_field toRight">
+                <label for="user_secondname"><strong>Apellido</strong></label>
+                <span class="custom_input_large">
+                    <input id="user_secondname" data-val="true" data-val-length="Sus apellidos no pueden tener más de 40 caracteres" data-val-length-max="40" name="SurName" onkeydown=" if (event.which == 13) { event.preventDefault(); }" title="Tus apellidos" type="text" value="">
+                </span>
+                <span class="field-validation-valid" data-valmsg-for="SurName" data-valmsg-replace="true"></span>
+            </div>
+            <!--Fecha de nacimiento-->
+            <div class="inline_field">
+                <label for="user_borndate"><strong>Fecha de nacimiento</strong></label>
+                <span class="custom_input_small">
+                    <input id="user_borndate" name="BirthDate" onkeydown=" if (event.which == 13) { event.preventDefault(); }" placeholder="dd/mm/aaaa" type="text" value="">
+                </span>
+                <span class="field-validation-valid" data-valmsg-for="BirthDate" data-valmsg-replace="true"></span>
+            </div>
+            <!--Fecha de Teléfono-->
+            <div class="inline_field toRight">
+                <label for="user_phone_1"><strong>Teléfono</strong></label>
+                <span class="custom_input_small">
+                    <input id="user_phone_1" data-val="true" data-val-customerphone="El teléfono debe contener únicamente dígitos" data-val-required="Es necesario introducir un número de teléfono" maxlength="10" name="FirstPhone" onkeydown=" if (event.which == 13) { event.preventDefault(); }" type="text" value="0985564134">
+                </span>
+                <span class="field-validation-valid" data-valmsg-for="FirstPhone" data-valmsg-replace="true"></span>
+            </div>
+
+            <!--Empleado Info-->
+            <div class="heading-m"><p>Preferencias de comunicación</p></div>
+
+            <!--Condiciones legales-->
+            <input checked="checked" data-val="true" data-val-mustbetrue="Debe aceptar el aviso legal y las condiciones de uso antes de continuar" data-val-required="The AcceptConditions field is required." id="checkLegal" name="AcceptConditions" style="opacity:0; position:absolute; Top:0;" type="checkbox" value="true"><input name="AcceptConditions" type="hidden" value="false">
+
+            <div class="inline_field check">
+                <span class="checkbox safari safari537 not_msie checked_checkbox"><input checked="checked" class="default_check" data-val="true" data-val-required="The AcceptEmails field is required." id="AcceptEmails" name="AcceptEmails" type="checkbox" value="true"></span><input name="AcceptEmails" type="hidden" value="false">
+                <label id="lbAcceptEmails" for="AcceptEmails">Sí, quiero recibir comunicaciones comerciales de Pizza Hut</label>
+            </div>
+            <div class="inline_field check">
+                <span class="checkbox safari safari537 not_msie checked_checkbox"><input checked="checked" class="default_check" data-val="true" data-val-required="The AcceptSMS field is required." id="AcceptSMS" name="AcceptSMS" type="checkbox" value="true"></span><input name="AcceptSMS" type="hidden" value="false">
+                <label id="lbAcceptSMS" for="AcceptSMS">Sí, quiero ofertas personalizadas basadas en el perfilado de mis datos</label>
+            </div>
+            <!--Button-->
+            <div class="actions_submit pbm">
+                <button type="submit" id="btnSavePersonalData" class="btn_submit button"><span>Guardar cambios en Mi Cuenta</span></button>
+            </div>
+
+            <!--Darme de baja-->
+            <div class="heading-m"><p>Darme de baja</p></div>
+            <div class="mod_text ">
+                <p>Recuerda que si lo haces perderás tus ofertas personalizadas y tu histórico de pedidos.</p>
+            </div>
+            <div class="inline_field check">
+                <span class="checkbox safari safari537 not_msie"><input name="ChkDeleteUser" id="ChkDeleteUser" class="default_check" type="checkbox" value="false"></span>
+                <label id="lbChkDeleteUser" for="ChkDeleteUser">Quiero dar de baja mi cuenta</label>
+                <button type="button" id="btn_DeleteUser" class="btn_submit button button--secondary"><span>Confirmar</span></button>
+            </div>
+            <input type="hidden" id="passConfirm" name="passConfirm">
+        </fieldset>
+    </div>
+</form>

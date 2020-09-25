@@ -11,6 +11,7 @@ import {
 import {UsuarioService} from "./usuario.service";
 import {UsuarioCreateDto} from "./dto/usuario.create.dto";
 import {validate} from "class-validator";
+import {Console} from "inspector";
 
 @Controller('usuario')
 export class UsuarioController{
@@ -34,36 +35,48 @@ export class UsuarioController{
      }
 
 
-     @Post()
-    async crearUsuario(@Body() parametrosUsuario){
+     @Post('crear')
+    async crearUsuario(
+        @Body() parametrosUsuario,
+        @Res() res
+     ){
+         //Crea a un nuevo usuario por defecto el estado es 1.
 
-        //Crea a un nuevo usuario por defecto el estado es 1.
-        let usuarioNuevo
-        try{
-            const usuarioDto= new UsuarioCreateDto()
-            usuarioDto.nombre=parametrosUsuario.nombre
-            usuarioDto.apellido=parametrosUsuario.apellido
-            usuarioDto.correo=parametrosUsuario.correo
-            usuarioDto.telefono=parametrosUsuario.telefono
-            usuarioDto.password=parametrosUsuario.password
-            usuarioDto.estado=parametrosUsuario.estado
-            usuarioDto.fechaNacimiento=parametrosUsuario.fechaNacimiento
+         /*let resultadoEncontrado
+         try {
+             resultadoEncontrado = await this._usuarioService.buscarEmail(parametrosUsuario.email);
+         } catch (error) {
+             throw new InternalServerErrorException('Error encontrando usuarios')
+         }*/
+         let usuarioNuevo
+         //if(!resultadoEncontrado){
+             try{
+                 const usuarioDto= new UsuarioCreateDto()
+                 usuarioDto.nombre=parametrosUsuario.name
+                 usuarioDto.apellido=parametrosUsuario.lastname
+                 usuarioDto.correo=parametrosUsuario.email
+                 usuarioDto.telefono=parametrosUsuario.telephone
+                 usuarioDto.password=(parametrosUsuario.pass===parametrosUsuario.re_pass) ? (parametrosUsuario.pass):("")
+                 usuarioDto.estado=(parametrosUsuario.estado==='2') ? ('2') : ('1')
+                 usuarioDto.fechaNacimiento=parametrosUsuario.birth
 
-            const errores= await validate(usuarioDto)
-            if(errores.length>0){
-                console.error('Errores', errores)
-                throw new BadRequestException('Errores encontrados')
-            }else{
-                usuarioNuevo=usuarioDto
-            }
+                 const errores= await validate(usuarioDto)
+                 if(errores.length>0){
+                     console.error('Errores', errores)
+                     throw new BadRequestException('Errores encontrados')
+                 }else{
+                     usuarioNuevo=usuarioDto
+                 }
 
-        }catch (e) {
-                throw new BadRequestException('Error con la validacion')
-        }
+             }catch (e) {
+                 throw new BadRequestException('Error con la validacion')
+             }
 
+         //}
         if(usuarioNuevo){
             try{
-                return this._usuarioService.crearUnUsuario(usuarioNuevo)
+                this._usuarioService.crearUnUsuario(usuarioNuevo)
+                return res.redirect('/inicio')
             }catch (e) {
                 throw new BadRequestException('Error en el servidor')
             }
@@ -73,26 +86,28 @@ export class UsuarioController{
      }
 
     @Post('login')
-    loginPost(
+    async loginPost(
         @Body() parametrosConsulta,
         @Res() response,
         @Session() session
     ) {
-        // validamos datos
-        const usuario = parametrosConsulta.usuario;
-        const password = parametrosConsulta.password;
-        if (usuario == 'esteban' && password == '1234') {
-            session.usuario = usuario
-            session.roles = ['Administrador']
-            return response.redirect('protegido');
-        } else {
-            if (usuario == 'nicolas' && password == '4321') {
-                session.usuario = usuario
-                session.roles = ['Supervisor']
-                return response.redirect('protegido');
-            } else {
-                return response.redirect('/login')
+        let resultadoEncontrado
+        try {
+            resultadoEncontrado = await this._usuarioService.buscarEmail(parametrosConsulta.email);
+            // validamos datos
+            if(resultadoEncontrado){
+                const user = parametrosConsulta.email;
+                const password = parametrosConsulta.pass;
+                if (user == resultadoEncontrado.correo_usuario && password == resultadoEncontrado.password_usuario) {
+                    console.log('Ingreso exitoso')
+                    session.usuario = user
+                    session.roles = ['Supervisor']
+                }
             }
+            return response.redirect('../inicio');
+        } catch (error) {
+            console.log(error)
+            throw new InternalServerErrorException('Error encontrando usuario')
         }
     }
 

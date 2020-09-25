@@ -67,8 +67,6 @@ export class UsuarioEntity{
         name:'fecha_nacimiento_usuario',
         type: 'date',
         nullable:true
-
-
     })
     fechaNacimiento?:string
 

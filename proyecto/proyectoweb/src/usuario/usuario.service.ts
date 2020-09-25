@@ -1,8 +1,9 @@
 import {InjectRepository} from "@nestjs/typeorm";
 import {UsuarioEntity} from "./usuario.entity";
-import {Repository} from "typeorm";
+import {FindManyOptions, Like, Repository} from "typeorm";
+import {Injectable} from "@nestjs/common";
 
-
+@Injectable()
 export class UsuarioService{
     constructor(
         @InjectRepository(UsuarioEntity)
@@ -32,6 +33,18 @@ export class UsuarioService{
         return this.repositorioUsuario.delete(id)
     }
 
+    buscarEmail(textoDeConsulta:string){
+        if (textoDeConsulta !== undefined) {
+            const consulta: FindManyOptions<UsuarioEntity> = {
+                where: [
+                    {
+                        correo: Like(`%${textoDeConsulta}%`)
+                    }
+                ]
+            }
+            return this.repositorioUsuario.find(consulta);
+        }
+    }
 
 
 }
