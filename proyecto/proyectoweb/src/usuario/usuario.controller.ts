@@ -6,7 +6,7 @@ import {
     HttpCode,
     InternalServerErrorException,
     Post,
-    Res
+    Res, Session
 } from "@nestjs/common";
 import {UsuarioService} from "./usuario.service";
 import {UsuarioCreateDto} from "./dto/usuario.create.dto";
@@ -72,25 +72,28 @@ export class UsuarioController{
         }
      }
 
-
-     @Get('vista/inicio')
-    inicio(@Res() res){
-         res.render(
-             'product');
-     }
-
-    @Get('vista/usuario')
-    vistaUsuario(
-        @Res() res
-    ){
-        const nombreControlador = 'Nicolas';
-        res.render(
-            'shop', //nombre de la vista (archivo)
-            {   //parametros de la vista
-                nombre: nombreControlador,
+    @Post('login')
+    loginPost(
+        @Body() parametrosConsulta,
+        @Res() response,
+        @Session() session
+    ) {
+        // validamos datos
+        const usuario = parametrosConsulta.usuario;
+        const password = parametrosConsulta.password;
+        if (usuario == 'esteban' && password == '1234') {
+            session.usuario = usuario
+            session.roles = ['Administrador']
+            return response.redirect('protegido');
+        } else {
+            if (usuario == 'nicolas' && password == '4321') {
+                session.usuario = usuario
+                session.roles = ['Supervisor']
+                return response.redirect('protegido');
+            } else {
+                return response.redirect('/login')
             }
-        )
+        }
     }
-
 
 }

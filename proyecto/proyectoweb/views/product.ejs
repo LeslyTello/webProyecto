@@ -42,7 +42,11 @@
       <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
    </head>
    <body>
-   <%- include('compartido/inicio.ejs')%>
+   <%if(usuario.usuario) {%>
+      <%- include('compartido/inicio.ejs')%>
+   <%} else {%>
+      <%- include('compartido/inicioUser.ejs')%>
+   <%}%>
       <!-- banner -->
       <div class="inner_page-banner one-img">
       </div>
