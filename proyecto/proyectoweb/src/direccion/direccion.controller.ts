@@ -1,4 +1,13 @@
-import {BadRequestException, Body, Controller, Get, InternalServerErrorException, Post} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    InternalServerErrorException,
+    Param,
+    Post,
+    Res
+} from "@nestjs/common";
 import {DireccionService} from "./direccion.service";
 import {DireccionCreateDto} from "./dto/direccion.create.dto";
 import {validate} from "class-validator";
@@ -50,5 +59,21 @@ export class DireccionController{
     @Get()
     mostrarTodos(){
        return this._direccionService.mostrarTodosDireccion()
+    }
+
+    @Post('eliminar/:id')
+    async eliminarDesdeVista(
+        @Param() parametrosRuta,
+        @Res() res
+    ) {
+        try {
+            const id = Number(parametrosRuta.id);
+            await this._direccionService.eliminarUnaDireccion(id)
+            return res.redirect('/usuario?page=addres')
+        } catch (error) {
+            console.log(error);
+            return res.redirect('/usuario?page=addres')
+        }
+
     }
 }

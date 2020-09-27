@@ -28,6 +28,32 @@
     <!--//stylesheets-->
     <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #555;
+            color: white;
+        }
+        a {
+            color: black;
+        }
+    </style>
+
 </head>
 <body class="pagCuenta" style="overflow: auto;">
 
@@ -40,64 +66,36 @@
             <div class="wrapper">
 
                 <div id="modToolsmy_account" class="modToolsmy_account">
-                    <a href="" class="btBackmy_account Link-Primary" title="Atrás">&lt; Atrás</a>
+                    <a href="../inicio" class="btBackmy_account Link-Primary" title="Atrás">&lt; Atrás</a>
                 </div>
 
                 <div class="mod_profile_header">
-                    <p class="heading-l">Hola inchiglemanicolax!</p>
-                    <p>Gestiona los datos de tu cuenta, tus pedidos, direcciones y métodos de pago.</p>
+                    <p class="heading-l">Hola <%= nombre%>!</p>
+                    <p>Gestiona los datos de tu cuenta, tus pedidos y direcciones.</p>
                 </div>
-
-                <!--Menu-->
-                <div class="mod_menuDtCuenta">
-                    <ul class="mod_onpage_navigation">
-                        <li class="datos active"><a href="#ni" data-mod="modDatos" title="Mis datos">Mis datos</a></li><!--Mis datos-->
-                        <li class="passWord"><a href="#ni" data-mod="modPass" title="Cambiar contraseña">Cambiar contraseña</a></li><!--Cambiar contraseña-->
-                        <li class="direccion"><a href="#ni" data-mod="modEntrega" title="Mis direcciones de entrega">Mis direcciones de entrega</a></li><!--Mis direcciones de entrega-->
-                        <li class="pago"><a href="#ni" data-mod="modPago" ttile="Mis medios de pago">Mis medios de pago</a></li><!--Mis medios de pago-->
-                        <li class="pedidoFav"><a href="#ni" data-mod="modPedidos" title="Mis pedidos">Mis pedidos</a></li><!--Mis pedidos-->
-                        <li class="cerrar"><a href="/homearea/logout" class="exit" title="Cerrar sesiónn">Cerrar sesión</a></li><!--Cerrar sesión-->
-                    </ul>
-                </div>
-
-                <div class="mod_moredatos">
-
-                    <!--Medios de pago-->
-                    <div class="col_r s8of12 modPago">
-                        <h2>Mis medios de pago</h2>
-                        <div class="mod_collapsable_forms">
-                            <ul><li><p class="title">Aún no tienes ningún medio de pago guardado. Introduce tu forma de pago favorita para agilizar tus pedidos. </p></li></ul>
-                        </div>
-                    </div>
-                    <!--Mis direcciones de entrega-->
-                    <div class="col_r s8of12 modEntrega">
-                        <h2>Mis direcciones de entrega</h2>
-
-                        <div class="mod_collapsable_forms">
-                            <ul><li><p class="title">Aún no tienes direcciones de entrega favoritas. </p></li></ul>
-                        </div>
-                    </div>
-                    <!-- pedidos programados-->
-                    <div class="col_r s8of12 modPedidos _programados">
-                        <h2>Mis pedidos programados</h2>
-                        <div class="mod_collapsable_forms">
-                            <ul>
-                                <li><p class="title">Aquí puedes ver los pedidos programados para recibirlos dónde y cuando quieras.</p></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Pedidos favoritos-->
-                    <div class="col_r s8of12 modPedidos _favoritos">
-                        <h2>Mis pedidos favoritos</h2>
-                        <div class="mod_collapsable_forms">
-                            <ul><li><p class="title">Aún no tienes pedidos favoritos, introduce los que más te gusten para tenerlos con un solo clic.</p></li></ul>
-                        </div>
+                <div class="row">
+                    <!--Menu-->
+                    <div class="mod_menuDtCuenta col-lg-4">
+                        <ul class="mod_onpage_navigation">
+                            <li class="datos active"><a href="/usuario?page=datos" data-mod="modDatos" title="Mis datos">Mis datos</a></li><!--Mis datos-->
+                            <li class="passWord"><a href="/usuario?page=pass" data-mod="modPass" title="Cambiar contraseña">Cambiar contraseña</a></li><!--Cambiar contraseña-->
+                            <li class="addres"><a href="/usuario?page=addres" data-mod="modAddress" ttile="Mis direcciones">Mis direcciones</a></li><!--Mis direcciones-->
+                            <li class="pedidoFav"><a href="/usuario?page=pedidos" data-mod="modPedidos" title="Mis pedidos">Mis pedidos</a></li><!--Mis pedidos-->
+                            <li class="cerrar"><a href="/usuario/logout" class="exit" title="Cerrar sesion">Cerrar sesión</a></li><!--Cerrar sesión-->
+                        </ul>
                     </div>
 
-                    <!-- Historial de pedidos-->
-
-                    <div class="col_r s8of12 actions"><a href="/homearea/logout" class="exit Link-Primary">Cerrar sesión</a></div>
-                </div>
+                    <div class="mod_moredatos col-lg-8">
+                        <% if(page=='pass'){ %>
+                            <%- include('changePass.ejs')%>
+                        <% } else if(page=='addres'){ %>
+                                <%- include('addres.ejs')%>
+                        <% } else if(page=='pedidos'){ %>
+                                <%- include('pedidos.ejs')%>
+                        <% } else { %>
+                                <%- include('Datos.ejs')%>
+                        <% } %>
+                    </div></div>
             </div>
         </div>
 
@@ -109,18 +107,5 @@
 
 
 </div>
-
-<!-- Personalize Products -->
-<div class="personalize_container"></div>
-
-<!-- popUps -->
-
-<div id="mask"></div>
-<div id="boxes"></div>
-
-
-
-
-
 </body>
 </html>

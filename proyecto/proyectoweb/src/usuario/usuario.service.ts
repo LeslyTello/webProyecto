@@ -34,16 +34,14 @@ export class UsuarioService{
     }
 
     buscarEmail(textoDeConsulta:string){
-        if (textoDeConsulta !== undefined) {
-            const consulta: FindManyOptions<UsuarioEntity> = {
-                where: [
-                    {
-                        correo: Like(`%${textoDeConsulta}%`)
-                    }
-                ]
-            }
-            return this.repositorioUsuario.find(consulta);
+        const consulta: FindManyOptions<UsuarioEntity> = {
+            where: [
+                {
+                    correo: Like(`%${textoDeConsulta}%`)
+                }
+            ]
         }
+        return this.repositorioUsuario.find(consulta);
     }
 
 

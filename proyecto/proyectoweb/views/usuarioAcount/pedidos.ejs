@@ -1,0 +1,30 @@
+<section class="service py-lg-4 py-md-3 py-sm-3 py-3">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h2 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Mis pedidos</h2>
+        <div class="row text-center">
+            <div class="col-sm-2">
+            </div>
+            <% let existenPedidos = typeof pedidos !== 'undefined' %>
+            <div class="col-lg-8">
+                <%if (existenPedidos) {%>
+                <table>
+                    <tr>
+                        <th># Pedido</th>
+                        <th>Fecha Pedido</th>
+                        <th>Total</th>
+                    </tr>
+                    <% pedidos.forEach( (objeto)=>{ %>
+                        <tr>
+                            <td><%= objeto.id %></td>
+                            <td><%= objeto.fechaPedido %></td>
+                            <td><%= objeto.total %></td>
+                        </tr>
+                    <% } ) %>
+                </table>
+                <%} else { %>
+                        <p class="title">Aquí puedes ver los pedidos.</p>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</section>

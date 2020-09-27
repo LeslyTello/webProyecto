@@ -13,10 +13,16 @@ export class AppController {
   @Get('inicio')
   inicio(
       @Res() res,
-      @Session() session,
+      @Session() session
   ){
-    res.render(
-        'index', {usuario:session.usuario}
-    );
+    if(typeof session == undefined){
+      res.render('index');
+    } else {
+      res.render(
+          'index', {
+            nombre: session.nombre
+          }
+      );
+    }
   }
 }
