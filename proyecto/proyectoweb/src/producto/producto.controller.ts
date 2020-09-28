@@ -181,7 +181,7 @@ export class ProductoController{
         @Param() parametroRuta
     ){
        try{
-       
+
            const respuesta=await this._productoService.mostrarUnProducto(Number(parametroRuta.id))
            if(respuesta!=undefined){
                return res.render('single', {
