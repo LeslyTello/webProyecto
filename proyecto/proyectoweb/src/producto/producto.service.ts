@@ -1,6 +1,6 @@
 import {InjectRepository} from "@nestjs/typeorm";
 
-import {FindManyOptions, Repository} from "typeorm";
+import {FindManyOptions, Like, Repository} from "typeorm";
 import {ProductoEntity} from "./producto.entity";
 import {UsuarioEntity} from "../usuario/usuario.entity";
 import {CategoriaEntity} from "../categoria/category.entity";
@@ -24,7 +24,15 @@ export class ProductoService{
     }
 
     mostrarUnProducto(id:number){
-        return this.repositorioProducto.findOne(id)
+
+        const consulta = {
+            relations: ['imagenes'],
+            where:{
+                id:id
+            }
+
+        }
+        return this.repositorioProducto.findOne(consulta);
     }
 
     buscarTodosProductos(){
@@ -51,5 +59,19 @@ export class ProductoService{
         console.log(consulta)
         return this.repositorioProducto.find(consulta);
 
+    }
+
+
+    bucarPorNombre(nombre:string){
+        const consulta = {
+
+            where:{
+                nombre:Like`%$nombre%`,
+
+            }
+
+        }
+        console.log(consulta)
+        return this.repositorioProducto.find(consulta);
     }
 }

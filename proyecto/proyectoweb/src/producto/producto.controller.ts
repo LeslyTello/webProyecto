@@ -6,13 +6,12 @@ import {
     HttpCode,
     InternalServerErrorException,
     Param,
-    Post, Req, Res
+    Post, Query, Req, Res
 } from "@nestjs/common";
 import {ProductoService} from "./producto.service";
 import {ProductoCreateDto} from "./dto/producto.create.dto";
 import {validate} from "class-validator";
 import {ProductoUpdateDto} from "./dto/producto.update.dto";
-import {forEachResolvedProjectReference} from "ts-loader/dist/instances";
 import {CategoriaService} from "../categoria/categoria.service";
 
 @Controller('producto')
@@ -76,6 +75,13 @@ export class ProductoController{
             throw new BadRequestException('Error en servidor')
         }
     }
+
+
+
+
+
+
+
 
     //Crear un nuevo producto
     @Post()
@@ -166,6 +172,31 @@ export class ProductoController{
         }
     }
 
+
+    //BUSQUEDA DE UN SOLO PRODUCTO
+    @Get('busqueda/:id')
+    async mostrar2
+    (
+        @Res() res,
+        @Param() parametroRuta
+    ){
+       try{
+           const respuesta=await this._productoService.mostrarUnProducto(Number(parametroRuta.id))
+           if(respuesta!=undefined){
+               return res.render('single', {
+                       producto: respuesta
+                   }
+               )
+           }else{
+               res.redirect('../../inicio?mensaje=error')
+           }
+
+       }catch (e) {
+           res.redirect('../../inicio?mensaje=error')
+       }
+
+
+    }
 
 
 

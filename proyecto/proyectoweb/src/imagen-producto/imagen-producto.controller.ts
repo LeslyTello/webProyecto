@@ -1,4 +1,13 @@
-import {BadRequestException, Body, Controller, Get, InternalServerErrorException, Param, Post} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    InternalServerErrorException,
+    Param,
+    Post,
+    Res
+} from "@nestjs/common";
 import {ImagenProductoService} from "./imagen-producto.service";
 import {ImagenProductoCreateDto} from "./dto/imagen-producto.create.dto";
 import {validate} from "class-validator";
@@ -69,6 +78,8 @@ export class ImagenProductoController{
     async mostrar(){
         return this._imagenProductoService.buscarTodosImagenProducto()
     }
+
+
 
 
 
