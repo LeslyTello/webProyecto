@@ -6,18 +6,21 @@ import {
     HttpCode,
     InternalServerErrorException,
     Param,
-    Post
+    Post, Req, Res
 } from "@nestjs/common";
 import {ProductoService} from "./producto.service";
 import {ProductoCreateDto} from "./dto/producto.create.dto";
 import {validate} from "class-validator";
 import {ProductoUpdateDto} from "./dto/producto.update.dto";
+import {forEachResolvedProjectReference} from "ts-loader/dist/instances";
+import {CategoriaService} from "../categoria/categoria.service";
 
 @Controller('producto')
 export class ProductoController{
 
     constructor(
-        private readonly _productoService:ProductoService
+        private readonly _productoService:ProductoService,
+        private readonly _categoriaService:CategoriaService
     ) {
     }
 
@@ -29,6 +32,44 @@ export class ProductoController{
         try{
             const respuesta=await this._productoService.buscarTodosProductos()
             return respuesta
+        }catch (e) {
+            throw new BadRequestException('Error en servidor')
+        }
+    }
+
+
+    @Get('/:nombre')
+    async mostrarPasteles(
+        @Res() response,
+        @Param() parametroRuta
+    ){
+
+        let producto
+        //   return res.render('product')
+        try{
+            if(parametroRuta.nombre=='todos'){
+                const respuesta=await this._productoService.buscarProductosImagen()
+                const categorias=await this._categoriaService.buscarNombreCategoria()
+
+                return response.render('product',{
+                    productoImagen:respuesta,
+                    categorias:categorias,
+                    busqueda:parametroRuta
+                })
+
+            }else{
+                const respuesta=await this._productoService.buscarPorCategoria(parametroRuta.nombre)
+                const categorias=await this._categoriaService.buscarNombreCategoria()
+
+                return response.render('product',{
+                        productoImagen:respuesta,
+                        categorias:categorias,
+                        busqueda:parametroRuta
+                    }
+
+                )
+            }
+
         }catch (e) {
             throw new BadRequestException('Error en servidor')
         }
@@ -122,6 +163,9 @@ export class ProductoController{
 
         }
     }
+
+
+
 
 
 

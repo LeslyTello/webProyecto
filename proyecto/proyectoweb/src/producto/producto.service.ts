@@ -1,7 +1,8 @@
 import {InjectRepository} from "@nestjs/typeorm";
 
-import {Repository} from "typeorm";
+import {FindManyOptions, Repository} from "typeorm";
 import {ProductoEntity} from "./producto.entity";
+import {UsuarioEntity} from "../usuario/usuario.entity";
 
 export class ProductoService{
     constructor( @InjectRepository(ProductoEntity)
@@ -27,5 +28,23 @@ export class ProductoService{
 
     buscarTodosProductos(){
         return this.repositorioProducto.find()
+    }
+
+    buscarProductosImagen() {
+        const consulta = {
+            relations: ['imagenes']
+
+        }
+        return this.repositorioProducto.find(consulta);
+    }
+
+    buscarPorCategoria(nombre:string){
+        const consulta = {
+            where:{
+                categoria:nombre
+            }
+
+        }
+        return this.repositorioProducto.find(consulta);
     }
 }

@@ -47,53 +47,53 @@ export class UsuarioController{
      }
 
 
-     @Post('crear')
+    @Post('crear')
     async crearUsuario(
         @Body() parametrosUsuario,
         @Res() res
-     ){
-         // Crea a un nuevo usuario por defecto el estado es 1.
-         let resultadoEncontrado
-         try {
-             resultadoEncontrado = await this._usuarioService.buscarEmail(parametrosUsuario.email);
-             let usuarioNuevo
-             if(typeof resultadoEncontrado[0].correo !== undefined){
-                 try{
-                     const usuarioDto= new UsuarioCreateDto()
-                     usuarioDto.nombre=parametrosUsuario.name
-                     usuarioDto.apellido=parametrosUsuario.lastname
-                     usuarioDto.correo=parametrosUsuario.email
-                     usuarioDto.telefono=parametrosUsuario.telephone
-                     usuarioDto.password=(parametrosUsuario.pass===parametrosUsuario.re_pass) ? (parametrosUsuario.pass):("")
-                     usuarioDto.estado=(parametrosUsuario.estado==='2') ? ('2') : ('1')
-                     usuarioDto.fechaNacimiento=parametrosUsuario.birth
+    ){
+        // Crea a un nuevo usuario por defecto el estado es 1.
+        let resultadoEncontrado
+        try {
+            resultadoEncontrado = await this._usuarioService.buscarEmail(parametrosUsuario.email);
+            let usuarioNuevo
+            if(resultadoEncontrado==''){
+                try{
+                    const usuarioDto= new UsuarioCreateDto()
+                    usuarioDto.nombre=parametrosUsuario.name
+                    usuarioDto.apellido=parametrosUsuario.lastname
+                    usuarioDto.correo=parametrosUsuario.email
+                    usuarioDto.telefono=parametrosUsuario.telephone
+                    usuarioDto.password=(parametrosUsuario.pass===parametrosUsuario.re_pass) ? (parametrosUsuario.pass):("")
+                    usuarioDto.estado=(parametrosUsuario.estado==='2') ? ('2') : ('1')
+                    usuarioDto.fechaNacimiento=parametrosUsuario.birth
 
-                     const errores= await validate(usuarioDto)
-                     if(errores.length>0){
-                         console.error('Errores', errores)
-                         throw new BadRequestException('Errores encontrados')
-                     }else{
-                         usuarioNuevo=usuarioDto
-                     }
+                    const errores= await validate(usuarioDto)
+                    if(errores.length>0){
+                        console.error('Errores', errores)
+                        throw new BadRequestException('Errores encontrados')
+                    }else{
+                        usuarioNuevo=usuarioDto
+                    }
 
-                 }catch (e) {
-                     throw new BadRequestException('Error con la validacion')
-                 }
-             }
-             if(usuarioNuevo){
-                 try{
-                     this._usuarioService.crearUnUsuario(usuarioNuevo)
-                     return res.redirect('../inicio')
-                 }catch (e) {
-                     throw new BadRequestException('Error en el servidor')
-                 }
-             }else{
-                 throw new BadRequestException('Error en los datos ingresados ')
-             }
-         } catch (error) {
-             throw new InternalServerErrorException('Error encontrando usuarios')
-         }
-     }
+                }catch (e) {
+                    throw new BadRequestException('Error con la validacion')
+                }
+            }
+            if(usuarioNuevo){
+                try{
+                    this._usuarioService.crearUnUsuario(usuarioNuevo)
+                    return res.redirect('../inicio')
+                }catch (e) {
+                    throw new BadRequestException('Error en el servidor')
+                }
+            }else{
+                throw new BadRequestException('Error en los datos ingresados ')
+            }
+        } catch (error) {
+            throw new InternalServerErrorException('Error encontrando usuarios')
+        }
+    }
 
     @Post('editar')
     async editarUsuario(
@@ -197,22 +197,28 @@ export class UsuarioController{
         }
         // validamos datos
         if(resultadoEncontrado){
-            const user = parametrosConsulta.email;
-            const password = parametrosConsulta.pass;
-            if (user == resultadoEncontrado[0].correo && password == resultadoEncontrado[0].password) {
-                console.log('Ingreso exitoso ' + resultadoEncontrado[0].nombre)
-                session.idUsuario = resultadoEncontrado[0].id
-                session.nombre = resultadoEncontrado[0].nombre
-                session.apellido = resultadoEncontrado[0].apellido
-                session.correo = resultadoEncontrado[0].correo
-                session.telefono = resultadoEncontrado[0].telefono
-                session.estado = resultadoEncontrado[0].estado
-                session.fechaNacimiento = resultadoEncontrado[0].fechaNacimiento
-                session.roles = resultadoEncontrado[0].roles
-                session.direcciones = resultadoEncontrado[0].direcciones
-                session.pedidos = resultadoEncontrado[0].pedidos
-                return response.redirect('../inicio');
+
+            try {
+                const user = parametrosConsulta.email;
+                const password = parametrosConsulta.pass;
+                if (user == resultadoEncontrado[0].correo && password == resultadoEncontrado[0].password) {
+                    console.log('Ingreso exitoso ' + resultadoEncontrado[0].nombre)
+                    session.idUsuario = resultadoEncontrado[0].id
+                    session.nombre = resultadoEncontrado[0].nombre
+                    session.apellido = resultadoEncontrado[0].apellido
+                    session.correo = resultadoEncontrado[0].correo
+                    session.telefono = resultadoEncontrado[0].telefono
+                    session.estado = resultadoEncontrado[0].estado
+                    session.fechaNacimiento = resultadoEncontrado[0].fechaNacimiento
+                    session.roles = resultadoEncontrado[0].roles
+                    session.direcciones = resultadoEncontrado[0].direcciones
+                    session.pedidos = resultadoEncontrado[0].pedidos
+                    return response.redirect('../inicio');
+                }
+            }catch (e) {
+                return response.redirect('../inicio?mensaje=error');
             }
+
         } else {
             return response.redirect('../inicio?mensaje=error');
         }
@@ -237,4 +243,7 @@ export class UsuarioController{
         request.session.destroy();
         return response.redirect('../inicio')
     }
+
+
+
 }
