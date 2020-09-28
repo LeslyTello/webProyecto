@@ -59,7 +59,7 @@ export class ProductoController{
                 })
 
             }else{
-                const idCategoria=await this._categoriaService.buscarIdPorNombre("pasteles")
+                const idCategoria=await this._categoriaService.buscarIdPorNombre(parametroRuta.nombre)
                 const respuesta=await this._productoService.buscarPorCategoria(idCategoria[0].id)
                 const categorias=await this._categoriaService.buscarNombreCategoria()
 
