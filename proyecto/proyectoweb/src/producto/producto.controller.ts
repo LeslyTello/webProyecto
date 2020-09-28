@@ -38,6 +38,7 @@ export class ProductoController{
     }
 
 
+
     @Get('/:nombre')
     async mostrarPasteles(
         @Res() response,
@@ -58,7 +59,8 @@ export class ProductoController{
                 })
 
             }else{
-                const respuesta=await this._productoService.buscarPorCategoria(parametroRuta.nombre)
+                const idCategoria=await this._categoriaService.buscarIdPorNombre("pasteles")
+                const respuesta=await this._productoService.buscarPorCategoria(idCategoria[0].id)
                 const categorias=await this._categoriaService.buscarNombreCategoria()
 
                 return response.render('product',{
@@ -163,6 +165,9 @@ export class ProductoController{
 
         }
     }
+
+
+
 
 
 
