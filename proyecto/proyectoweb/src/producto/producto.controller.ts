@@ -61,7 +61,7 @@ export class ProductoController{
 
 
 
-    @Get('/:nombre')
+    @Get('nombre/:nombre')
     async mostrarPasteles(
         @Res() response,
         @Param() parametroRuta
@@ -99,15 +99,41 @@ export class ProductoController{
         }
     }
 
+    @Get('checkout')
+    async checkout(
+        @Res() response
+    ){
+        return response.render('checkout')
+    }
 
-
-
-
-
-
+    @Get(':id')
+    async productoId(
+        @Res() res,
+        @Session() session,
+        @Param() parametrosRuta
+    ){
+        console.log('producto')
+        let producto
+        try {
+            producto = await this._productoService.mostrarUnProducto(parametrosRuta.id);
+        } catch (error) {
+            throw new InternalServerErrorException('Error encontrando productos')
+        }
+        if(producto){
+            console.log(producto)
+            res.render(
+                'single', {
+                    nombre: session.nombre,
+                    producto: producto[0]
+                }
+            );
+        } else {
+            res.redirect('../productos')
+        }
+    }
 
     //Crear un nuevo producto
-    @Post()
+    @Post('crear')
     @HttpCode(201)
     async crearProducto(
         @Body() parametros
@@ -133,7 +159,7 @@ export class ProductoController{
                 producto=productoValidar
             }
         }catch(e){
-                throw new BadRequestException('Error con class-validator')
+            throw new BadRequestException('Error con class-validator')
         }
 
         if(producto){
@@ -152,7 +178,7 @@ export class ProductoController{
 
     //modificar un producto
 
-    @Post('/:id')
+    @Post('editar/:id')
     @HttpCode(201)
     async modificarProducto(
         @Body() parametros,

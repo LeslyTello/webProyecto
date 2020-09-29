@@ -43,13 +43,7 @@
    </head>
    <body>
 
-
-
    <%- include('compartido/inicio.ejs')%>
-      <!-- Foto de fondo -->
-      <div class="inner_page-banner one-img">
-      </div>
-
       <!-- Titulo de la pagina -->
       <div class="using-border py-3">
          <div class="inner_breadcrumb  ml-4">
@@ -119,27 +113,21 @@
                      </div>
                      <br>
 
-
-
-
-
                      <div class="occasion-cart justify-content-center">
-
                         <div class="toys single-item singlepage ">
                            <form action="#" method="post" class="align-items-center">
                               <label for="cantidad">Cantidad</label>
-                              <input type="number" name="cantidad" min="1" max="<%=producto.cantidad%>" name="cantidad">
+                              <input type="number" name="idx" min="1" max="<%=producto.cantidad%>" value="1">
                               <br>
-
-                                 <button type="submit" class=" ptoys-cart add"><i class="fas fa-shopping-cart"></i>
-                                    Añadir al carrito
+                                 <input type="hidden" name="cmd" value="_cart">
+                                 <input type="hidden" name="toys_item" value="<%= producto.nombre %>">
+                                 <input type="hidden" name="amount" value="<%= producto.precio %>">
+                                 <button type="submit" class="toys-cart ptoys-cart">
+                                    Añadir al Carrito
                                  </button>
-
-
                            </form>
                         </div>
                      </div>
-
                   </div>
                   <div class="clearfix"> </div>
 
