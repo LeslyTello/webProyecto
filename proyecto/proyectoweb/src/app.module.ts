@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {RolEntity} from "./rol/rol.entity";
@@ -22,6 +21,7 @@ import {RolModule} from "./rol/rol.module";
 import {UsuarioRolModule} from "./usuario-rol/usuario-rol.module";
 import {PedidoModule} from "./pedido/pedido.module";
 import {DetallePedidoModule} from "./detalle-pedido/detalle-pedido.module";
+import {AppController} from "./app.controller";
 
 //Contrase;a Lesly> adminWEB98
 @Module({

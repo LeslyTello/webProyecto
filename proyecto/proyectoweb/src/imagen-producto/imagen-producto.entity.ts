@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {ProductoEntity} from "../producto/producto.entity";
 
 @Entity('imagen_producto')
@@ -21,5 +21,6 @@ export class ImagenProductoEntity{
         type => ProductoEntity,
         producto=>producto.imagenes
     )
+    @JoinColumn({name: 'id-producto'})
     producto:ProductoEntity
 }

@@ -52,23 +52,19 @@
         a {
             color: black;
         }
+        td, th {
+            border: 1px solid #000;
+        }
     </style>
-
 </head>
 <body class="pagCuenta" style="overflow: auto;">
-
 <div class="layout">
-
     <div class="layout_catalog ">
-
         <div id="my_account" class="my_account">
-
             <div class="wrapper">
-
                 <div id="modToolsmy_account" class="modToolsmy_account">
                     <a href="../inicio" class="btBackmy_account Link-Primary" title="Atrás">&lt; Atrás</a>
                 </div>
-
                 <div class="mod_profile_header">
                     <p class="heading-l">Hola <%= nombre%>!</p>
                     <p>Gestiona los datos de tu cuenta, tus pedidos y direcciones.</p>
@@ -84,7 +80,6 @@
                             <li class="cerrar"><a href="/usuario/logout" class="exit" title="Cerrar sesion">Cerrar sesión</a></li><!--Cerrar sesión-->
                         </ul>
                     </div>
-
                     <div class="mod_moredatos col-lg-8">
                         <% if(page=='pass'){ %>
                             <%- include('changePass.ejs')%>
@@ -98,10 +93,7 @@
                     </div></div>
             </div>
         </div>
-
         <script defer="" src="/areas/phes/resources/scripts/dcuenta.min.js?v=5.0.23.0" charset="utf-8"></script>
-
-
     </div>
 
 

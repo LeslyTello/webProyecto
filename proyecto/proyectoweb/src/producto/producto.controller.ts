@@ -6,14 +6,14 @@ import {
     HttpCode,
     InternalServerErrorException,
     Param,
-    Post
+    Post, Query, Res, Session
 } from "@nestjs/common";
 import {ProductoService} from "./producto.service";
 import {ProductoCreateDto} from "./dto/producto.create.dto";
 import {validate} from "class-validator";
 import {ProductoUpdateDto} from "./dto/producto.update.dto";
 
-@Controller('producto')
+@Controller('productos')
 export class ProductoController{
 
     constructor(
@@ -24,13 +24,36 @@ export class ProductoController{
 
     //Mostrar todos los productos
     @Get()
-    @HttpCode(200)
-    async mostrarProductos(){
-        try{
-            const respuesta=await this._productoService.buscarTodosProductos()
-            return respuesta
-        }catch (e) {
-            throw new BadRequestException('Error en servidor')
+    async productos(
+        @Res() res,
+        @Session() session,
+        @Body() parametrosCuerpo,
+        @Query() parametrosConsulta
+    ){
+        if(typeof session == undefined){
+            res.render('product');
+        } else {
+            let productos
+            try {
+                if(parametrosConsulta.busqueda !== undefined){
+                    productos = await this._productoService.buscarTodosProductos(parametrosConsulta.busqueda);
+                } else {
+                    productos = await this._productoService.buscarTodosProductos();
+                }
+            } catch (error) {
+                throw new InternalServerErrorException('Error encontrando productos')
+            }
+            if(productos){
+                console.log(productos)
+                res.render(
+                    'product', {
+                        nombre: session.nombre,
+                        productos: productos
+                    }
+                );
+            } {
+                throw new InternalServerErrorException('Error encontrando productos')
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ImagenProductoEntity} from "../imagen-producto/imagen-producto.entity";
 import {CategoriaEntity} from "../categoria/category.entity";
 import {DetallePedidoEntity} from "../detalle-pedido/detalle-pedido.entity";

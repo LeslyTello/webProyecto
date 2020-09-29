@@ -1,6 +1,6 @@
 import {InjectRepository} from "@nestjs/typeorm";
 
-import {Repository} from "typeorm";
+import {FindManyOptions, Like, Repository} from "typeorm";
 import {ProductoEntity} from "./producto.entity";
 
 export class ProductoService{
@@ -25,7 +25,22 @@ export class ProductoService{
         return this.repositorioProducto.findOne(id)
     }
 
-    buscarTodosProductos(){
-        return this.repositorioProducto.find()
+    buscarTodosProductos(textoDeConsulta?:String){
+        if (textoDeConsulta !== undefined) {
+            const consulta: FindManyOptions<ProductoEntity> = {
+                relations:['imagenes'],
+                where: [
+                    {
+                        nombre: Like(`%${textoDeConsulta}%`)
+                    },
+                    {
+                        descripcion: Like(`%${textoDeConsulta}%`)
+                    }
+                ]
+            }
+            return this.repositorioProducto.find(consulta);
+        } else{
+            return this.repositorioProducto.find({relations:['imagenes']});
+        }
     }
 }
