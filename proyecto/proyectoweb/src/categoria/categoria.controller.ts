@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Controller, Get, HttpCode, Param, Post} from "@nestjs/common";
+import {BadRequestException, Body, Controller, Get, HttpCode, Param, Post, Query, Res} from "@nestjs/common";
 import {CategoriaService} from "./categoria.service";
 import {CategoriaCreateDto} from "./dto/categoria.create.dto";
 import {validate} from "class-validator";
@@ -11,12 +11,21 @@ export class CategoriaController{
     }
 
     //Mostrar todos los datos de la entidad
+    //Mostrar todos los datos de la entidad
     @Get()
     @HttpCode(200)
-    async mostrarTodos(){
+    async mostrarTodos(
+        @Res() res
+    ){
         try{
             const respuesta=await this._categoriaService.buscarTodosCategoria()
-            return respuesta
+
+            res.render('admin/dashboard',{
+                    categorias:respuesta,
+                    page:'categoria'
+                }
+
+            )
 
         }catch (e) {
             throw new BadRequestException('Error en el servidor')
@@ -25,10 +34,11 @@ export class CategoriaController{
 
 
     //Crear una nueva categoria
-    @Post()
+    @Post('crear')
     @HttpCode(201)
-   async  crearUnaCategoria(
-        @Body() parametros
+    async  crearUnaCategoria(
+        @Body() parametros,
+        @Res() res
     ){
         let categoriaNueva
         try{
@@ -51,13 +61,76 @@ export class CategoriaController{
         if(categoriaNueva){
             try{
                 const respuesta= await this._categoriaService.crearUnaCategoria(categoriaNueva)
-                return respuesta
+                return res.redirect('/categoria')
             }catch (e) {
                 throw new BadRequestException('Error en el servidor')
             }
         }
 
     }
+
+    @Get('crearDesdeVista')
+    async mostrarVistaCrear(
+        @Res() res
+    ){
+        return res.render('admin/dashboard',{
+
+                page:'crearCategoria'
+            }
+        )
+    }
+
+
+    @Get('editarDesdeVista')
+    async editar(
+        @Res() res,
+        @Body() parametros
+    ){
+
+
+        return res.render('admin/dashboard',{
+
+                page:'crearCategoria'
+            }
+        )
+    }
+
+    @Get('editar/:id')
+    async crearCategoriaVistaModificar(
+        @Res() res,
+        @Query() parametrosConsulta,
+        @Param() parametrosRuta,
+
+    ) {
+
+
+        let nuevaCategoria
+
+        const id = Number(parametrosRuta.id)
+
+        let categoriaEncontrada
+        try {
+            categoriaEncontrada = await this._categoriaService.mostrarUnaCategoria(id)
+        } catch (error) {
+            console.error('Error del servidor')
+            return res.redirect('/productos/admin')
+        }
+
+        if (categoriaEncontrada) {
+            return res.render(
+                'admin/dashboard',
+                {
+                    page:'crearCategoria',
+                    categoriaEncontrada: categoriaEncontrada
+
+                }
+            )
+        } else {
+            return res.redirect('/productos/admin')
+        }
+
+    }
+
 
 
     //Busqueda de nombres de categorias
@@ -71,14 +144,16 @@ export class CategoriaController{
     obtener(
         @Param() parametro
     ){
-      return this._categoriaService.buscarIdPorNombre(parametro.nombre)
+        return this._categoriaService.buscarIdPorNombre(parametro.nombre)
     }
 
     //Modificar una categoria
     @Post('/:id')
     @HttpCode(200)
     async modificarCategoria(@Body() parametros,
-                             @Param() parametroRuta){
+                             @Param() parametroRuta,
+                             @Res()res
+    ){
         let categoriaModificada
         try{
             const categoriaValidar=new CategoriaUpdateDto()
@@ -102,7 +177,8 @@ export class CategoriaController{
         if(categoriaModificada){
             try{
                 const respuesta= await this._categoriaService.modificarUnaCategoria(categoriaModificada)
-                return respuesta
+                return res.redirect('/categoria')
+
             }catch (e) {
                 throw new BadRequestException('Error en el servidor')
             }
@@ -112,15 +188,16 @@ export class CategoriaController{
 
 
     //Eliminar una categoria
-    @Post('eliminar/:id')
+    @Get('eliminar/:id')
     async eliminarDesdeVista(
         @Param() parametroRuta,
+        @Res() res
 
     ){
         try{
             const id= Number(parametroRuta.id)
-           const respuesta= await this._categoriaService.eliminarUnaCategoria(id)
-            return respuesta
+            const respuesta= await this._categoriaService.eliminarUnaCategoria(id)
+            res.redirect('/categoria')
 
         }catch (e) {
             console.log(e)

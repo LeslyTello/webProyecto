@@ -12,7 +12,10 @@ export class PedidoService{
     }
 
     mostrarTodosPedido(){
-        return this.repositorioPedido.find()
+        const consulta={
+            relations:['usuario']
+        }
+        return this.repositorioPedido.find(consulta)
     }
 
     eliminarUnPedido(id:number){

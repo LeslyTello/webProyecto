@@ -32,6 +32,18 @@ export class ProductoService{
         return this.repositorioProducto.find(consulta);
     }
 
+    mostrarUnProducto2(id:number){
+
+        const consulta = {
+            relations: ['imagenes'],
+            where:{
+                id:id
+            }
+
+        }
+        return this.repositorioProducto.findOne(consulta);
+    }
+
     buscarTodosProductos(textoDeConsulta?:String){
         if (textoDeConsulta !== undefined) {
             const consulta: FindManyOptions<ProductoEntity> = {
@@ -83,6 +95,31 @@ export class ProductoService{
 
         }
         console.log(consulta)
+        return this.repositorioProducto.find(consulta);
+    }
+
+
+    buscarTodosProductosAdmin(textoDeConsulta?:string){
+
+        const consulta: FindManyOptions<ProductoEntity> = {
+            relations:['imagenes', 'categoria'],
+
+        }
+
+        return this.repositorioProducto.find(consulta);
+
+    }
+
+    bucarPorNombre2(nombre:string){
+        const consulta = {
+
+            where:{
+                nombre:nombre,
+
+            }
+
+        }
+
         return this.repositorioProducto.find(consulta);
     }
 }

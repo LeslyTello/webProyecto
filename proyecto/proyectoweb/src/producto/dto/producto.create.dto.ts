@@ -8,7 +8,6 @@ export class ProductoCreateDto{
 
     @MaxLength(50)
     @IsNotEmpty()
-    @IsAlpha()
     nombre:string
 
 

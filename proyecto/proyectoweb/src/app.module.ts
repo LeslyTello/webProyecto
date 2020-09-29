@@ -42,7 +42,7 @@ import {AppController} from "./app.controller";
     host: 'localhost', //IP
     port: 3306, //puerto
     username: 'root', //usuario
-    password: 'root', //password
+    password: 'adminWEB98', //password
     database: 'web', //base de datos
     entities: [ //TODAS LAS ENTIDADES
         UsuarioEntity,

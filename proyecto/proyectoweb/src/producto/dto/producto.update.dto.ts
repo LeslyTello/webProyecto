@@ -12,7 +12,6 @@ export class ProductoUpdateDto{
 
  @MaxLength(50)
  @IsOptional()
- @IsAlpha()
  nombre?:string
 
  @MaxLength(100)

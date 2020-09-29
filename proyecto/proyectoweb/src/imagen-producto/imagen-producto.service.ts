@@ -1,5 +1,5 @@
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {createQueryBuilder, Repository} from "typeorm";
 import {ImagenProductoEntity} from "./imagen-producto.entity";
 
 
@@ -25,6 +25,20 @@ export class ImagenProductoService{
 
     modificarImagenProducto(imagenModificada:ImagenProductoEntity){
         return this.repositorioImagenProducto.save(imagenModificada)
+
+    }
+
+    eliminarImagenProductoPorProducto(id:number){
+        const res=createQueryBuilder()
+            .delete()
+            .from(ImagenProductoEntity)
+            .where("producto = :id", { id: id })
+            .execute()
+
+
+        return res
+
+
 
     }
 

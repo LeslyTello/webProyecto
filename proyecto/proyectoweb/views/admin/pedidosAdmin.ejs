@@ -1,0 +1,45 @@
+<link href="/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+<link rel="stylesheet" href="/css/shop.css" type="text/css" />
+<!--//Shoping cart-->
+<!--checkout-->
+<link rel="stylesheet" type="text/css" href="/css/checkout.css">
+<!--//checkout-->
+<!--stylesheets-->
+<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+<section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <div class="shop_inner_inf">
+            <div class="privacy about">
+                <h3 class="text-center">PEDIDOS</h3>
+                <div class="checkout-right">
+
+                    <table class="timetable_sub">
+                        <thead>
+                        <tr>
+                            <th>Nro.Pedido</th>
+                            <th>Fecha</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Nombre del cliente</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%pedidos.forEach((pedido)=>{%>
+                            <tr class="rem1">
+                                <td class="invert"><%=pedido.id%></td>
+                                <td class="invert"><%=pedido.fechaPedido%></td>
+                                <td class="invert"><%=pedido.total%></td>
+                                <td class="invert"><%=pedido.estado%></td>
+                                <td class="invert"><%=pedido.usuario.nombre%> <%=pedido.usuario.apellido%></td>
+                            </tr>
+                        <%})%>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

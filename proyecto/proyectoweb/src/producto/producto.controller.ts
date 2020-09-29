@@ -13,16 +13,264 @@ import {ProductoCreateDto} from "./dto/producto.create.dto";
 import {validate} from "class-validator";
 import {ProductoUpdateDto} from "./dto/producto.update.dto";
 import {CategoriaService} from "../categoria/categoria.service";
+import {ImagenProductoService} from "../imagen-producto/imagen-producto.service";
+import {ImagenProductoEntity} from "../imagen-producto/imagen-producto.entity";
 
 @Controller('productos')
 export class ProductoController{
 
     constructor(
         private readonly _productoService:ProductoService,
-        private readonly _categoriaService:CategoriaService
+        private readonly _categoriaService:CategoriaService,
+        private readonly _imagenProductoService:ImagenProductoService
     ) {
     }
 
+
+    //ADMIN
+    //ADMIN
+
+    @Get('productosAdmin')
+    async productosAdmin(
+        @Res() res,
+        @Query() parametrosConsulta
+    ){
+
+        let productos
+        try {
+
+            productos = await this._productoService.buscarTodosProductosAdmin();
+
+        } catch (error) {
+            throw new InternalServerErrorException('Error encontrando productos')
+        }
+        if(productos){
+            console.log(productos)
+            res.render(
+                'admin/dashboard',
+                {
+                    page: 'producto',
+                    productos:productos
+
+                }
+            )
+
+        } {
+            throw new InternalServerErrorException('Error encontrando productos')
+        }
+
+    }
+
+
+    @Get('admin')
+    async mostrarUsuarios(
+        @Res() res,
+        @Query() parametrosBusqueda,
+
+    ){
+        return res.render(
+            'admin/dashboard',
+            {
+                page: parametrosBusqueda.page
+
+            }
+        )
+    }
+
+
+    @Get('crearDesdeVista')
+    async mostrarVistaCrear(
+        @Res() res
+    ){
+        const categorias=await this._categoriaService.buscarTodosCategoria()
+        return res.render('admin/dashboard',{
+
+                page:'crearProducto',
+                categorias:categorias
+            }
+        )
+    }
+
+
+    @Post('crear')
+    @HttpCode(201)
+    async crearProductoVista(
+        @Body() parametros,
+        @Res() res
+    ){
+        let producto
+        try{
+
+            //Validar las entradas
+            console.log(parametros)
+            const productoValidar= new ProductoCreateDto()
+            productoValidar.codigo=parametros.codigo
+            productoValidar.descripcion=parametros.descripcion
+            productoValidar.nombre=parametros.nombre
+            productoValidar.precio=Number(parametros.precio)
+            productoValidar.cantidad=Number(parametros.cantidad)
+            productoValidar.fechaInicio=parametros.fechaInicio
+            productoValidar.fechaFin=parametros.fechaFin
+            productoValidar.categoria=parametros.categoria.value
+
+            console.log(parametros.categoria.value)
+
+            console.log(parametros)
+            const errores=await validate(productoValidar)
+            if(errores.length>0){
+                console.log('Errores', errores)
+
+            }else{
+                producto=productoValidar
+
+            }
+        }catch(e){
+            throw new BadRequestException('Error con class-validator')
+        }
+
+        if(producto){
+            try{
+                const respuesta=await this._productoService.crearUnProducto(producto)
+                const id=await this._productoService.bucarPorNombre2(producto.nombre)
+
+                if(parametros.imagenes==''){
+                    return res.redirect('/productos/productosAdmin')
+                }else{
+                    try{
+                        const imagenProducto={
+                            producto:id[0],
+                            url:parametros.imagenes
+                        } as ImagenProductoEntity
+                        console.log(imagenProducto)
+                        const imagenProducto2=await this._imagenProductoService.crearImagenProducto(imagenProducto)
+                        return res.redirect('/productos/productosAdmin')
+                    }catch (e) {
+                        throw new InternalServerErrorException('Error en el servidor')
+                    }
+                }
+
+
+
+            }catch (e) {
+                throw new InternalServerErrorException('Error en el servidor')
+            }
+
+        }
+
+
+    }
+
+
+    //Eliminar un producto
+    @Get('eliminar/:id')
+    async eliminarDesdeVista(
+        @Param() parametroRuta,
+        @Res() res
+
+    ){
+        try{
+            const id= Number(parametroRuta.id)
+            const imagenes= await this._imagenProductoService.eliminarImagenProductoPorProducto(id)
+            console.log(imagenes)
+            const respuesta= await this._productoService.eliminarUnProducto(id)
+            res.redirect('/productos/productosAdmin')
+
+        }catch (e) {
+            console.log(e)
+
+
+        }
+    }
+
+    @Get('editar/:id')
+    async crearCategoriaVistaModificar(
+        @Res() res,
+        @Query() parametros,
+        @Param() parametrosRuta,
+
+    ) {
+
+        let nuevaCategoria
+
+        const id = Number(parametrosRuta.id)
+
+        let productoEncontrado
+        let categorias
+        try {
+            productoEncontrado = await this._productoService.mostrarUnProducto2(id)
+            categorias=await this._categoriaService.buscarTodosCategoria()
+            console.log('Producto',productoEncontrado)
+            console.log(categorias)
+        } catch (error) {
+            console.error('Error del servidor')
+            return res.redirect('/productos/admin')
+        }
+
+        if (productoEncontrado) {
+            return res.render(
+                'admin/dashboard',
+                {
+                    page:'crearProducto',
+                    productoEncontrado: productoEncontrado,
+                    categorias:categorias
+
+                }
+            )
+        } else {
+            return res.redirect('/productos/admin')
+        }
+
+    }
+
+
+
+
+    @Post('/:id')
+    @HttpCode(201)
+    async modificarProducto2(
+        @Body() parametros,
+        @Param()  parametroRuta,
+        @Res() res
+    ){
+        let producto
+        try{
+            //Validar las entradas
+            const productoValidar= new ProductoUpdateDto()
+            productoValidar.codigo=parametros.codigo
+            productoValidar.descripcion=parametros.descripcion
+            productoValidar.nombre=parametros.nombre
+            productoValidar.precio=Number(parametros.precio)
+            productoValidar.cantidad=Number(parametros.cantidad)
+            productoValidar.fechaInicio=parametros.fechaInicio
+            productoValidar.fechaFin=parametros.fechaFin
+            productoValidar.categoria=parametros.categoria.value
+            productoValidar.id=Number(parametroRuta.id)
+
+            const errores=await validate(productoValidar)
+            if(errores.length>0){
+                console.log('Errores', errores)
+                throw new BadRequestException('Error con class-validator')
+            }else{
+                producto=productoValidar
+
+            }
+        }catch(e){
+            throw new BadRequestException('Error con class-validator')
+        }
+
+        if(producto){
+            try{
+                const respuesta=await this._productoService.modificarUnProducto(producto)
+                res.redirect('./productosAdmin')
+            }catch (e) {
+                throw new InternalServerErrorException('Error en el servidor')
+            }
+
+        }
+    }
+
+
+    //FIN ADMIN
 
     //Mostrar todos los productos
     @Get()

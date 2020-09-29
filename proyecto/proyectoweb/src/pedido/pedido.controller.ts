@@ -1,4 +1,13 @@
-import {BadRequestException, Body, Controller, Get, InternalServerErrorException, Param, Post} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    InternalServerErrorException,
+    Param,
+    Post,
+    Res
+} from "@nestjs/common";
 import {PedidoService} from "./pedido.service";
 import {PedidoCreateDto} from "./dto/pedido.create.dto";
 import {validate} from "class-validator";
@@ -91,9 +100,21 @@ export class PedidoController{
 
 
 
-    @Get()
-    async mostrar(){
-        return this._pedidoService.mostrarTodosPedido()
+    @Get(
+
+
+    )
+    async mostrar(
+        @Res() res
+    ){
+        const pedidos= await this._pedidoService.mostrarTodosPedido()
+        console.log(pedidos)
+        res.render('admin/dashboard',{
+                pedidos:pedidos,
+                page:'pedido'
+            }
+            )
+
     }
 
     @Get('relacion')

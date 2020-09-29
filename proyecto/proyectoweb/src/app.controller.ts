@@ -44,4 +44,19 @@ export class AppController {
     }
 
 
+    @Get('admin')
+    async mostrarUsuarios(
+        @Res() res,
+        @Query() parametrosBusqueda,
+
+    ){
+        return res.render(
+            'admin/dashboard',
+            {
+                page: parametrosBusqueda.page
+
+            }
+        )
+    }
+
 }

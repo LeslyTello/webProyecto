@@ -5,6 +5,7 @@ import {ImagenProductoService} from "./imagen-producto.service";
 import {ImagenProductoController} from "./imagen-producto.controller";
 
 @Module({
+    exports:[ImagenProductoService],
     imports:[
         TypeOrmModule.forFeature(
             [ImagenProductoEntity],
