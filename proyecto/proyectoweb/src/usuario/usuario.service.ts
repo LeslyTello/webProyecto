@@ -37,7 +37,7 @@ export class UsuarioService{
         const consulta: FindManyOptions<UsuarioEntity> = {
             where: [
                 {
-                    correo: Like(`%${textoDeConsulta}%`)
+                    correo: textoDeConsulta
                 }
             ]
         }

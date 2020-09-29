@@ -58,7 +58,7 @@
                   <a href="index.ejs">Productos</a>
                   <span>/ /</span>
                </li>
-               <li>Un producto</li>
+               <li><%=producto.nombre%></li>
             </ul>
          </div>
       </div>
@@ -74,15 +74,13 @@
                         <!--Grid de las 3 imagenes-->
                         <div class="flexslider1">
                            <ul class="slides">
-                              <li data-thumb="/images/f2.jpg">
-                                 <div class="thumb-image"> <img src="/images/f2.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                              </li>
-                              <li data-thumb="/images/f1.jpg">
-                                 <div class="thumb-image"> <img src="/images/f1.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                              </li>
-                              <li data-thumb="/images/f3.jpg">
-                                 <div class="thumb-image"> <img src="/images/f3.jpg" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                              </li>
+                              <%const imagenes=producto.imagenes%>
+                              <%imagenes.forEach((objeto)=>{%>
+                                 <li data-thumb="<%=objeto.url%>" width="100" height="250">
+                                    <div class="thumb-image"> <img src="<%=objeto.url%>" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                                 </li>
+                              <%})%>
+
                            </ul>
                            <div class="clearfix"></div>
                         </div>
@@ -91,8 +89,8 @@
 
                   <!--Division derecha-->
                   <div class="col-lg-8 single-right-left simpleCart_shelfItem">
-                     <h3>Pastel nombre</h3>
-                     <p><span class="item_price">$650</span>
+                     <h3><%=producto.nombre%></h3>
+                     <p><span class="item_price">$<%=producto.precio%></span>
 
                      </p>
 
@@ -101,57 +99,43 @@
                         <div id="horizontalTab">
                            <ul class="resp-tabs-list">
                                  <li>Descripcion</li>
-                              <li>Information</li>
+
                            </ul>
                            <div class="resp-tabs-container">
                               <!--/tab_one-->
                               <div class="tab1">
                                  <div class="single_page">
-                                    <h6>Lorem ipsum dolor sit amet</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-                                       blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                       ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-                                       magna aliqua.
+                                    <h6><%=producto.nombre%></h6>
+                                    <p>
+                                       <%=producto.descripcion%>
                                     </p>
-                                    <p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-                                       blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                       ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-                                       magna aliqua.
-                                    </p>
+
                                  </div>
                               </div>
                               <!--//tab_one-->
-                              <div class="tab3">
-                                 <div class="single_page">
-                                    <h6>Teddy Bear(Blue)</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-                                       blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                       ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-                                       magna aliqua.
-                                    </p>
-                                    <p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-                                       blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                       ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-                                       magna aliqua.
-                                    </p>
-                                 </div>
-                              </div>
+
                            </div>
                         </div>
                      </div>
+                     <br>
+
+
 
 
 
                      <div class="occasion-cart justify-content-center">
-                        <div class="toys single-item singlepage">
-                           <form action="#" method="post">
-                              <input type="hidden" name="cmd" value="_cart">
-                              <input type="hidden" name="add" value="1">
-                              <input type="hidden" name="toys_item" value="Farenheit">
-                              <input type="hidden" name="amount" value="575.00">
-                              <button type="submit" class="toys-cart ptoys-cart add">
-                              Add to Cart
-                              </button>
+
+                        <div class="toys single-item singlepage ">
+                           <form action="#" method="post" class="align-items-center">
+                              <label for="cantidad">Cantidad</label>
+                              <input type="number" name="cantidad" min="1" max="<%=producto.cantidad%>" name="cantidad">
+                              <br>
+
+                                 <button type="submit" class=" ptoys-cart add"><i class="fas fa-shopping-cart"></i>
+                                    Añadir al carrito
+                                 </button>
+
+
                            </form>
                         </div>
                      </div>
@@ -163,47 +147,14 @@
             </div>
          </div>
       </section>
+   <br>
 
 
    <!--Pie de pagina-->
    <%- include('compartido/pie.ejs')%>
 
       <!-- Modal 1-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <div class="register-form">
-                     <form action="#" method="post">
-                        <div class="fields-grid">
-                           <div class="styled-input">
-                              <input type="text" placeholder="Your Name" name="Your Name" required="">
-                           </div>
-                           <div class="styled-input">
-                              <input type="email" placeholder="Your Email" name="Your Email" required="">
-                           </div>
-                           <div class="styled-input">
-                              <input type="password" placeholder="password" name="password" required="">
-                           </div>
-                           <button type="submit" class="btn subscrib-btnn">Login</button>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- //Modal 1-->
-      <!--jQuery-->
+     
       <script src="/js/jquery-2.2.3.min.js"></script>
       <!-- newsletter modal -->
       <!-- cart-js -->

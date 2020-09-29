@@ -5,19 +5,21 @@ import {
     Get,
     HttpCode,
     InternalServerErrorException,
-    Param,
-    Post, Query, Res, Session
+    Param, Session,
+    Post, Query, Req, Res
 } from "@nestjs/common";
 import {ProductoService} from "./producto.service";
 import {ProductoCreateDto} from "./dto/producto.create.dto";
 import {validate} from "class-validator";
 import {ProductoUpdateDto} from "./dto/producto.update.dto";
+import {CategoriaService} from "../categoria/categoria.service";
 
 @Controller('productos')
 export class ProductoController{
 
     constructor(
-        private readonly _productoService:ProductoService
+        private readonly _productoService:ProductoService,
+        private readonly _categoriaService:CategoriaService
     ) {
     }
 
@@ -56,6 +58,53 @@ export class ProductoController{
             }
         }
     }
+
+
+
+    @Get('/:nombre')
+    async mostrarPasteles(
+        @Res() response,
+        @Param() parametroRuta
+    ){
+
+        let producto
+        //   return res.render('product')
+        try{
+            if(parametroRuta.nombre=='todos'){
+                const respuesta=await this._productoService.buscarProductosImagen()
+                const categorias=await this._categoriaService.buscarNombreCategoria()
+
+                return response.render('product',{
+                    productoImagen:respuesta,
+                    categorias:categorias,
+                    busqueda:parametroRuta
+                })
+
+            }else{
+                const idCategoria=await this._categoriaService.buscarIdPorNombre(parametroRuta.nombre)
+                const respuesta=await this._productoService.buscarPorCategoria(idCategoria[0].id)
+                const categorias=await this._categoriaService.buscarNombreCategoria()
+
+                return response.render('product',{
+                        productoImagen:respuesta,
+                        categorias:categorias,
+                        busqueda:parametroRuta
+                    }
+
+                )
+            }
+
+        }catch (e) {
+            throw new BadRequestException('Error en servidor')
+        }
+    }
+
+
+
+
+
+
+
 
     //Crear un nuevo producto
     @Post()

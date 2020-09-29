@@ -17,7 +17,6 @@
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
-
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
@@ -224,19 +223,16 @@
 </div>
 <!-- //Modal 1-->
 <!--js working-->
-<script src='js/jquery-2.2.3.min.js'></script>
+<script src='/js/jquery-2.2.3.min.js'></script>
 <!--//js working-->
 <!-- cart-js -->
-<script src="js/minicart.js"></script>
+<script src="/js/minicart.js"></script>
 <script>
     toys.render();
-
     toys.cart.on('toys_checkout', function (evt) {
         var items, len, i;
-
         if (this.subtotal() > 0) {
             items = this.items();
-
             for (i = 0, len = items.length; i < len; i++) {}
         }
     });
@@ -261,12 +257,11 @@
                 $('.events').append("<li>after event fired.</li>");
             }
         });
-
     });
 </script>
 <!--// responsiveslides banner-->
 <!--slider flexisel -->
-<script src="js/jquery.flexisel.js"></script>
+<script src="/js/jquery.flexisel.js"></script>
 <script>
     $(window).load(function() {
         $("#flexiselDemo1").flexisel({
@@ -291,13 +286,12 @@
                 }
             }
         });
-
     });
 </script>
 <!-- //slider flexisel -->
 <!-- start-smoth-scrolling -->
-<script src="js/move-top.js"></script>
-<script src="js/easing.js"></script>
+<script src="/js/move-top.js"></script>
+<script src="/js/easing.js"></script>
 <script>
     jQuery(document).ready(function ($) {
         $(".scroll").click(function (event) {
@@ -312,7 +306,6 @@
 <!-- here stars scrolling icon -->
 <script>
     $(document).ready(function () {
-
         var defaults = {
             containerID: 'toTop', // fading element id
             containerHoverID: 'toTopHover', // fading element hover id
@@ -322,12 +315,11 @@
         $().UItoTop({
             easingType: 'easeOutQuart'
         });
-
     });
 </script>
 <!-- //here ends scrolling icon -->
 <!--bootstrap working-->
-<script src="js/bootstrap.min.js"></script>
+<script src="/bootstrap.min.js"></script>
 <!-- //bootstrap working-->
 </body>
 </html>

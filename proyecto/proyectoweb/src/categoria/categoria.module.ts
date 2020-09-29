@@ -9,7 +9,8 @@ import {CategoriaEntity} from "./category.entity";
         [CategoriaEntity],
         'default')],
     providers:[CategoriaService],
-    controllers:[CategoriaController]
+    controllers:[CategoriaController],
+    exports:[CategoriaService]
 })
 export class CategoriaModule{
 
