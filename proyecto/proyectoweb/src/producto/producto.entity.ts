@@ -87,6 +87,7 @@ export class ProductoEntity{
         type => CategoriaEntity,
         categoria=> categoria.productos
     )
+    @JoinColumn({name: 'id_categoria'})
     categoria:CategoriaEntity
 
 

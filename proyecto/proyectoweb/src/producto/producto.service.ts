@@ -38,7 +38,7 @@ export class ProductoService{
     buscarTodosProductos(textoDeConsulta?:String){
         if (textoDeConsulta !== undefined) {
             const consulta: FindManyOptions<ProductoEntity> = {
-                relations:['imagenes'],
+                relations:['imagenes', 'categoria'],
                 where: [
                     {
                         nombre: Like(`%${textoDeConsulta}%`)
