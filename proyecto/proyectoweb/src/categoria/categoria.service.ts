@@ -1,6 +1,7 @@
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {FindManyOptions, Like, Repository} from "typeorm";
 import {CategoriaEntity} from "./category.entity";
+import {ProductoEntity} from "../producto/producto.entity";
 
 
 export class CategoriaService{
@@ -29,7 +30,6 @@ export class CategoriaService{
     buscarTodosCategoria(){
         return this.repositorioCategoria.find()
     }
-
 
     buscarNombreCategoria(){
         let peticion

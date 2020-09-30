@@ -11,7 +11,6 @@ import {
 import {UsuarioService} from "./usuario.service";
 import {UsuarioCreateDto} from "./dto/usuario.create.dto";
 import {validate} from "class-validator";
-import {Console} from "inspector";
 import {UsuarioUpdateDto} from "./dto/usuario.update.dto";
 
 @Controller('usuario')

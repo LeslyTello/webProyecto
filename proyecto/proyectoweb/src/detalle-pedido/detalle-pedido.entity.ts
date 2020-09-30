@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {PedidoEntity} from "../pedido/pedido.entity";
 import {ProductoEntity} from "../producto/producto.entity";
 
@@ -33,6 +33,7 @@ export class DetallePedidoEntity{
         type => PedidoEntity,
         pedido=>pedido.detallesPedido
     )
+    @JoinColumn({name: 'id_pedido'})
     pedido:PedidoEntity
 
 
@@ -40,6 +41,7 @@ export class DetallePedidoEntity{
         type=>ProductoEntity,
         producto=>producto.detallesProducto
     )
+    @JoinColumn({name: 'id_producto'})
     producto:ProductoEntity
 
 

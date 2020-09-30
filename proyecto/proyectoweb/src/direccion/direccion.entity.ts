@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {UsuarioEntity} from "../usuario/usuario.entity";
 
 @Entity('direccion')
@@ -49,6 +49,7 @@ export class DireccionEntity {
         type=> UsuarioEntity,
         usuario=> usuario.direcciones
     )
+    @JoinColumn({name: 'id_usuario'})
     usuario:UsuarioEntity
 
 }
